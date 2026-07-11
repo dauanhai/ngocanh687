@@ -972,6 +972,42 @@ const TRANSLATIONS = {
     return Number(n).toLocaleString('vi-VN') + 'đ';
   }
 
+  const EBOOK_URL = '/hoc-vien/downloads/Mat-Ma-Tu-Do.docx';
+  const EBOOK_CARD_HTML = `
+    <div class="course-card reveal visible">
+      <div class="course-cover">
+        <span class="course-badge course-badge--free" data-i18n="catalog.badge.free">Miễn phí</span>
+        <div class="mini-book"><span class="mini-book-title" data-i18n="catalog.ebook.spine">MẬT MÃ TỰ DO</span></div>
+      </div>
+      <div class="course-body">
+        <h3 class="course-title" data-i18n="catalog.ebook.title">Ebook Mật Mã Tự Do</h3>
+        <div class="course-meta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h7a2 2 0 0 1 2 2v12a2 2 0 0 0-2-2H4z"></path><path d="M20 5h-7a2 2 0 0 0-2 2v12a2 2 0 0 1 2-2h7z"></path></svg><span data-i18n="catalog.ebook.meta">48 trang · Đọc ngay</span></div>
+        <div class="course-price-row">
+          <span class="course-price course-price--free" data-i18n="catalog.free">0đ</span>
+          <button type="button" class="course-link" id="ebookCta" data-i18n="catalog.cta">Nhận ngay →</button>
+        </div>
+      </div>
+    </div>
+  `;
+  let pendingEbookDownload = false;
+  function downloadEbook() {
+    const a = document.createElement('a');
+    a.href = EBOOK_URL;
+    a.download = '';
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+  }
+  function wireEbookCta() {
+    const btn = document.getElementById('ebookCta');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      if (currentUser) { downloadEbook(); return; }
+      pendingEbookDownload = true;
+      openAuth('register');
+    });
+  }
+
   let sb, bankInfo, currentUser = null;
   const loginNavBtn = document.getElementById('loginNavBtn');
   const registerNavBtn = document.getElementById('registerNavBtn');
@@ -1009,6 +1045,7 @@ const TRANSLATIONS = {
     showToast(TRANSLATIONS[currentLang]['toast.registerSuccess']);
     registerForm.reset();
     closeAuth();
+    if (pendingEbookDownload) { pendingEbookDownload = false; downloadEbook(); }
   });
 
   const loginForm = document.getElementById('loginPanel');
@@ -1050,7 +1087,7 @@ const TRANSLATIONS = {
       return;
     }
 
-    grid.innerHTML = courses.map((c) => `
+    grid.innerHTML = EBOOK_CARD_HTML + courses.map((c) => `
       <div class="course-card reveal visible">
         <div class="course-cover">
           <span class="course-badge${c.is_bundle ? ' course-badge--popular' : ''}">
@@ -1061,7 +1098,7 @@ const TRANSLATIONS = {
         <div class="course-body">
           <h3 class="course-title">${escapeHtml(c.title)}</h3>
           <div class="course-meta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg><span>${escapeHtml(c.description || '')}</span></div>
-          <div class="course-foot">
+          <div class="course-price-row">
             <span class="course-price">${formatVnd(c.price)}</span>
             <button type="button" class="course-link" data-buy="${c.id}" data-title="${escapeHtml(c.title)}" data-price="${c.price}">Mua khoá học →</button>
           </div>
@@ -1072,6 +1109,7 @@ const TRANSLATIONS = {
     grid.querySelectorAll('[data-buy]').forEach((btn) => {
       btn.addEventListener('click', () => buyCourse(btn.dataset.buy, btn.dataset.title, Number(btn.dataset.price)));
     });
+    wireEbookCta();
   }
 
   async function buyCourse(courseId, title, price) {
