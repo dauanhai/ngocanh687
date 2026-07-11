@@ -152,7 +152,7 @@
       html += `<div class="lesson-video"><iframe src="https://www.youtube.com/embed/${content.youtube_id}" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>`;
     }
     if (content.content_text) {
-      html += `<div class="lesson-text">${escapeHtml(content.content_text).replace(/\n/g, '<br>')}</div>`;
+      html += `<div class="lesson-text">${marked.parse(content.content_text)}</div>`;
     }
     contentBox.innerHTML = html;
     contentBox.style.display = 'block';

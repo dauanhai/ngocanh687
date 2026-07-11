@@ -3,3 +3,9 @@ node_modules/
 *.log
 .vercel
 .claude/settings.local.json
+
+# Nội dung khoá học thô (trả phí) - không đưa lên GitHub, chỉ nạp vào Supabase
+/Bai-*.md
+/Ebook-*.docx
+/bai*.svg
+/*.zip
