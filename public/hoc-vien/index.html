@@ -186,9 +186,9 @@ section.tight { padding: 64px 0; }
 .course-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
 .course-card:hover { transform: translateY(-6px); border-color: var(--gold); box-shadow: var(--shadow-glow); }
 .course-cover { position: relative; aspect-ratio: 4/3; background: var(--gradient-surface); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.course-cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
 .course-cover::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 20%, rgba(245,196,81,.16), transparent 65%); }
 .course-num { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 0; font-family: var(--font-display); font-size: 68px; font-weight: 800; color: transparent; -webkit-text-stroke: 2px var(--gold); opacity: .3; pointer-events: none; }
-.course-cover-icon { position: relative; z-index: 1; width: 54px; height: 54px; filter: drop-shadow(0 6px 16px rgba(245,196,81,.3)); }
 .course-badge {
   position: absolute; top: 14px; left: 14px; z-index: 2; display: inline-flex; align-items: center; gap: 6px;
   padding: 5px 12px; border-radius: 999px; font-size: 11.5px; font-weight: 700; letter-spacing: .02em;
@@ -206,13 +206,6 @@ section.tight { padding: 64px 0; }
 .course-link { font-size: 13px; font-weight: 700; color: var(--gold); white-space: nowrap; }
 .course-link:hover { color: var(--gold-2); }
 
-.mini-book { position: relative; z-index: 1; width: 78px; height: 108px; border-radius: 4px 8px 8px 4px; background: linear-gradient(160deg, #1c170e 0%, #100d08 100%); border: 1px solid var(--gold); box-shadow: -8px 10px 22px rgba(0,0,0,.5); display: flex; align-items: center; justify-content: center; padding: 10px; }
-.mini-book-title { font-family: var(--font-display); font-size: 11px; font-weight: 700; text-align: center; line-height: 1.25; color: var(--gold-2); }
-.mini-stack { position: relative; z-index: 1; width: 70px; height: 90px; }
-.mini-stack span { position: absolute; inset: 0; border-radius: 8px; background: var(--gradient-surface); border: 1px solid var(--border); }
-.mini-stack span:nth-child(1) { transform: rotate(-8deg) translate(-8px, 4px); }
-.mini-stack span:nth-child(2) { transform: rotate(4deg) translate(6px, 2px); }
-.mini-stack span:nth-child(3) { border-color: var(--gold); box-shadow: 0 10px 24px rgba(0,0,0,.4); }
 
 .split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
 .split img, .split .media-block { border-radius: var(--radius-lg); }
@@ -982,25 +975,24 @@ const TRANSLATIONS = {
     return Number(n).toLocaleString('vi-VN') + 'đ';
   }
 
-  const COURSE_ICONS = {
-    'mat-ma-tu-duy': '<circle cx="24" cy="20" r="9"></circle><path d="M20 29h8M21.5 33h5"></path><path d="M24 5v4M9 11l3 3M39 11l-3 3M5 24h4M39 24h4"></path>',
-    'mat-ma-chon-ngach': '<circle cx="24" cy="24" r="16"></circle><circle cx="24" cy="24" r="9"></circle><circle cx="24" cy="24" r="2" fill="url(#courseIconGrad)" stroke="none"></circle>',
-    'mat-ma-noi-dung': '<rect x="10" y="7" width="28" height="34" rx="3"></rect><path d="M16 17h16M16 24h16M16 31h10"></path>',
-    'mat-ma-tu-dong-hoa-ai': '<rect x="14" y="14" width="20" height="20" rx="4"></rect><circle cx="24" cy="24" r="5"></circle><path d="M24 4v6M24 38v6M4 24h6M38 24h6M10.5 10.5l4.2 4.2M33.3 33.3l4.2 4.2M10.5 37.5l4.2-4.2M33.3 14.7l4.2-4.2"></path>',
-    'mat-ma-nhan-ban': '<rect x="7" y="15" width="21" height="26" rx="3"></rect><rect x="20" y="7" width="21" height="26" rx="3"></rect>',
+  const COURSE_COVERS = {
+    'mat-ma-tu-duy': 'khoa-01',
+    'mat-ma-chon-ngach': 'khoa-02',
+    'mat-ma-noi-dung': 'khoa-03',
+    'mat-ma-tu-dong-hoa-ai': 'khoa-04',
+    'mat-ma-nhan-ban': 'khoa-05',
   };
-  function courseIconSvg(slug) {
-    const paths = COURSE_ICONS[slug];
-    if (!paths) return '';
-    return `<svg class="course-cover-icon" viewBox="0 0 48 48" fill="none" stroke="url(#courseIconGrad)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${paths}</svg>`;
+  function courseCoverImg(slug, title) {
+    const file = COURSE_COVERS[slug];
+    if (!file) return '';
+    return `<img src="images/covers/${file}.jpg" alt="${escapeHtml(title)}" loading="lazy">`;
   }
 
   const EBOOK_URL = '/hoc-vien/downloads/Mat-Ma-Tu-Do.docx';
   const EBOOK_CARD_HTML = `
     <div class="course-card reveal visible">
       <div class="course-cover">
-        <span class="course-badge course-badge--free" data-i18n="catalog.badge.free">Miễn phí</span>
-        <div class="mini-book"><span class="mini-book-title" data-i18n="catalog.ebook.spine">MẬT MÃ TỰ DO</span></div>
+        <img src="images/covers/ebook.jpg" alt="Ebook Mật Mã Tự Do" loading="lazy">
       </div>
       <div class="course-body">
         <h3 class="course-title" data-i18n="catalog.ebook.title">Ebook Mật Mã Tự Do</h3>
@@ -1113,12 +1105,13 @@ const TRANSLATIONS = {
     grid.innerHTML = EBOOK_CARD_HTML + courses.map((c, idx) => `
       <div class="course-card reveal visible">
         <div class="course-cover">
-          <span class="course-badge${c.is_bundle ? ' course-badge--popular' : ''}">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
-            <span>${c.is_bundle ? 'Trọn bộ' : 'Khoá'}</span>
-          </span>
-          ${c.is_bundle ? '' : `<span class="course-num">${String(idx + 1).padStart(2, '0')}</span>`}
-          ${courseIconSvg(c.slug)}
+          ${courseCoverImg(c.slug, c.title) || `
+            <span class="course-badge${c.is_bundle ? ' course-badge--popular' : ''}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+              <span>${c.is_bundle ? 'Trọn bộ' : 'Khoá'}</span>
+            </span>
+            <span class="course-num">${String(idx + 1).padStart(2, '0')}</span>
+          `}
         </div>
         <div class="course-body">
           <h3 class="course-title">${escapeHtml(c.title)}</h3>
