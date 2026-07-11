@@ -187,7 +187,8 @@ section.tight { padding: 64px 0; }
 .course-card:hover { transform: translateY(-6px); border-color: var(--gold); box-shadow: var(--shadow-glow); }
 .course-cover { position: relative; aspect-ratio: 4/3; background: var(--gradient-surface); display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .course-cover::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 20%, rgba(245,196,81,.16), transparent 65%); }
-.course-num { position: relative; z-index: 1; font-family: var(--font-display); font-size: 60px; font-weight: 800; color: transparent; -webkit-text-stroke: 2px var(--gold); opacity: .8; }
+.course-num { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; z-index: 0; font-family: var(--font-display); font-size: 68px; font-weight: 800; color: transparent; -webkit-text-stroke: 2px var(--gold); opacity: .3; pointer-events: none; }
+.course-cover-icon { position: relative; z-index: 1; width: 54px; height: 54px; filter: drop-shadow(0 6px 16px rgba(245,196,81,.3)); }
 .course-badge {
   position: absolute; top: 14px; left: 14px; z-index: 2; display: inline-flex; align-items: center; gap: 6px;
   padding: 5px 12px; border-radius: 999px; font-size: 11.5px; font-weight: 700; letter-spacing: .02em;
@@ -375,6 +376,15 @@ section.tight { padding: 64px 0; }
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="courseIconGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffdd8a"></stop>
+      <stop offset="50%" stop-color="#f5c451"></stop>
+      <stop offset="100%" stop-color="#ff8a1e"></stop>
+    </linearGradient>
+  </defs>
+</svg>
 
 <header class="site-header">
   <div class="container header-inner">
@@ -972,6 +982,19 @@ const TRANSLATIONS = {
     return Number(n).toLocaleString('vi-VN') + 'đ';
   }
 
+  const COURSE_ICONS = {
+    'mat-ma-tu-duy': '<circle cx="24" cy="20" r="9"></circle><path d="M20 29h8M21.5 33h5"></path><path d="M24 5v4M9 11l3 3M39 11l-3 3M5 24h4M39 24h4"></path>',
+    'mat-ma-chon-ngach': '<circle cx="24" cy="24" r="16"></circle><circle cx="24" cy="24" r="9"></circle><circle cx="24" cy="24" r="2" fill="url(#courseIconGrad)" stroke="none"></circle>',
+    'mat-ma-noi-dung': '<rect x="10" y="7" width="28" height="34" rx="3"></rect><path d="M16 17h16M16 24h16M16 31h10"></path>',
+    'mat-ma-tu-dong-hoa-ai': '<rect x="14" y="14" width="20" height="20" rx="4"></rect><circle cx="24" cy="24" r="5"></circle><path d="M24 4v6M24 38v6M4 24h6M38 24h6M10.5 10.5l4.2 4.2M33.3 33.3l4.2 4.2M10.5 37.5l4.2-4.2M33.3 14.7l4.2-4.2"></path>',
+    'mat-ma-nhan-ban': '<rect x="7" y="15" width="21" height="26" rx="3"></rect><rect x="20" y="7" width="21" height="26" rx="3"></rect>',
+  };
+  function courseIconSvg(slug) {
+    const paths = COURSE_ICONS[slug];
+    if (!paths) return '';
+    return `<svg class="course-cover-icon" viewBox="0 0 48 48" fill="none" stroke="url(#courseIconGrad)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${paths}</svg>`;
+  }
+
   const EBOOK_URL = '/hoc-vien/downloads/Mat-Ma-Tu-Do.docx';
   const EBOOK_CARD_HTML = `
     <div class="course-card reveal visible">
@@ -1075,7 +1098,7 @@ const TRANSLATIONS = {
     const grid = document.getElementById('course-grid');
     const { data: courses, error } = await sb
       .from('courses')
-      .select('id, title, description, price, is_bundle')
+      .select('id, slug, title, description, price, is_bundle')
       .order('sort_order', { ascending: true });
 
     if (error) {
@@ -1087,13 +1110,15 @@ const TRANSLATIONS = {
       return;
     }
 
-    grid.innerHTML = EBOOK_CARD_HTML + courses.map((c) => `
+    grid.innerHTML = EBOOK_CARD_HTML + courses.map((c, idx) => `
       <div class="course-card reveal visible">
         <div class="course-cover">
           <span class="course-badge${c.is_bundle ? ' course-badge--popular' : ''}">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
             <span>${c.is_bundle ? 'Trọn bộ' : 'Khoá'}</span>
           </span>
+          ${c.is_bundle ? '' : `<span class="course-num">${String(idx + 1).padStart(2, '0')}</span>`}
+          ${courseIconSvg(c.slug)}
         </div>
         <div class="course-body">
           <h3 class="course-title">${escapeHtml(c.title)}</h3>
