@@ -4,6 +4,7 @@ const cors = require('cors');
 const path = require('path');
 const multer = require('multer');
 const MetaApiService = require('./services/metaApi');
+const lmsRoutes = require('./routes/lms');
 
 const app = express();
 const meta = new MetaApiService();
@@ -12,6 +13,9 @@ const meta = new MetaApiService();
 app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Học viện Tự Do Thịnh Vượng / Đậu Ánh AI (public/hoc-vien) — xác nhận đơn hàng, mở khoá khoá học
+app.use('/api/lms', lmsRoutes);
 
 // In-memory storage: works both locally and on serverless platforms
 // (e.g. Vercel) where the filesystem is read-only outside /tmp.

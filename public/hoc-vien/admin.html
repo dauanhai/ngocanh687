@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản trị đơn hàng | Tự Do Thịnh Vượng - Đậu Ánh AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&family=Fraunces:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/hoc-vien/" class="logo"><span class="logo-mark">ĐA</span><span>Tự Do Thịnh Vượng</span></a>
+      <div class="header-actions"><span>Trang quản trị</span></div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-head">
+      <h1>Quản trị đơn hàng</h1>
+      <p>Xác nhận đơn chuyển khoản để mở khoá khoá học cho học viên.</p>
+    </div>
+
+    <div class="card" id="passcode-card" style="max-width:380px">
+      <div class="form-group">
+        <label class="form-label">Mật khẩu quản trị</label>
+        <input type="password" id="passcode-input" class="form-control" placeholder="Nhập ADMIN_PASSCODE">
+      </div>
+      <button class="btn btn-primary btn-block" id="passcode-submit">Vào trang quản trị</button>
+    </div>
+
+    <div id="admin-panel" style="display:none">
+      <div class="tabs">
+        <button data-status="pending" class="active">Chờ xác nhận</button>
+        <button data-status="confirmed">Đã xác nhận</button>
+        <button data-status="rejected">Đã từ chối</button>
+      </div>
+      <div class="card table-wrap">
+        <table>
+          <thead>
+            <tr><th>Học viên</th><th>Khoá học</th><th>Số tiền</th><th>Mã CK</th><th>Ngày tạo</th><th></th></tr>
+          </thead>
+          <tbody id="orders-tbody"><tr><td colspan="6">Đang tải...</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <div class="toast-container" id="toast-container"></div>
+  <script src="js/admin.js"></script>
+</body>
+</html>
