@@ -99,8 +99,15 @@ main { padding: 40px 0 80px; }
 .lesson-row { border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 18px; margin-bottom: 10px; }
 .lesson-row-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .lesson-row-head strong { font-size: 14.5px; }
-.lesson-video { margin-top: 14px; aspect-ratio: 16/9; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); }
+.lesson-content { margin-top: 14px; }
+.lesson-video { aspect-ratio: 16/9; border-radius: var(--radius-sm); overflow: hidden; border: 1px solid var(--border); }
 .lesson-video iframe { width: 100%; height: 100%; border: 0; }
+.lesson-text {
+  margin-top: 14px; padding: 20px 22px; background: var(--bg-alt); border: 1px solid var(--border);
+  border-radius: var(--radius-sm); font-size: 14.5px; line-height: 1.8; color: var(--text-dim);
+  max-width: 720px;
+}
+.lesson-text:first-child { margin-top: 0; }
 .lesson-check { display: flex; align-items: center; gap: 7px; font-size: 13px; color: var(--text-dim); }
 .lesson-check input { width: 15px; height: 15px; }
 

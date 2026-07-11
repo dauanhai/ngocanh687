@@ -116,10 +116,10 @@
               <input type="checkbox" class="progress-check" data-lesson="${l.id}" ${doneSet.has(l.id) ? 'checked' : ''}>
               Đã học xong
             </label>
-            <button class="btn btn-outline btn-sm play-btn" data-lesson="${l.id}">▶ Xem video</button>
+            <button class="btn btn-outline btn-sm play-btn" data-lesson="${l.id}">▶ Xem bài học</button>
           </div>
         </div>
-        <div class="lesson-video" style="display:none"></div>
+        <div class="lesson-content" style="display:none"></div>
       </div>
     `).join('');
 
@@ -133,21 +133,29 @@
 
   async function playLesson(lessonId) {
     const row = document.querySelector(`.lesson-row[data-lesson="${lessonId}"]`);
-    const videoBox = row.querySelector('.lesson-video');
-    if (videoBox.style.display === 'block') { videoBox.style.display = 'none'; return; }
+    const contentBox = row.querySelector('.lesson-content');
+    if (contentBox.style.display === 'block') { contentBox.style.display = 'none'; return; }
 
-    const { data: video, error } = await sb
+    const { data: content, error } = await sb
       .from('lesson_videos')
-      .select('youtube_id')
+      .select('youtube_id, content_text')
       .eq('lesson_id', lessonId)
       .single();
 
-    if (error || !video) {
-      showToast('Chưa có video cho bài học này, hoặc bạn chưa được mở khoá.', 'error');
+    if (error || !content || (!content.youtube_id && !content.content_text)) {
+      showToast('Bài học này chưa có nội dung, hoặc bạn chưa được mở khoá.', 'error');
       return;
     }
-    videoBox.innerHTML = `<iframe src="https://www.youtube.com/embed/${video.youtube_id}" allow="autoplay; encrypted-media" allowfullscreen></iframe>`;
-    videoBox.style.display = 'block';
+
+    let html = '';
+    if (content.youtube_id) {
+      html += `<div class="lesson-video"><iframe src="https://www.youtube.com/embed/${content.youtube_id}" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>`;
+    }
+    if (content.content_text) {
+      html += `<div class="lesson-text">${escapeHtml(content.content_text).replace(/\n/g, '<br>')}</div>`;
+    }
+    contentBox.innerHTML = html;
+    contentBox.style.display = 'block';
   }
 
   async function toggleProgress(lessonId, completed) {

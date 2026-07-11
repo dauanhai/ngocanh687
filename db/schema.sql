@@ -99,12 +99,14 @@ create policy "enrollments_select_own" on enrollments
 -- chỉ service-role key (bỏ qua RLS) từ route admin mới ghi được bảng này.
 
 -- ==================== lesson_videos ====================
--- Tách riêng khỏi `lessons` để RLS chặn được video theo hàng.
+-- Tách riêng khỏi `lessons` để RLS chặn được nội dung theo hàng.
 -- Chỉ lộ ra nếu: bài học is_preview = true, HOẶC học viên đã có enrollment
 -- cho đúng khoá học chứa bài học đó.
+-- Một bài học có thể chỉ có video, chỉ có văn bản, hoặc cả hai.
 create table if not exists lesson_videos (
   lesson_id uuid primary key references lessons(id) on delete cascade,
-  youtube_id text not null
+  youtube_id text,
+  content_text text
 );
 
 alter table lesson_videos enable row level security;
