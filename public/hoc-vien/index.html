@@ -1,87 +1,1180 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tự Do Thịnh Vượng - Đậu Ánh AI | Kho Mật Mã</title>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&family=Fraunces:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tự Do Thịnh Vượng - Affiliate AI | Đậu Ánh AI</title>
+<meta name="description" content="Tự Do Thịnh Vượng - Affiliate AI | Đậu Ánh AI: học viện Affiliate x AI, 5 cánh cửa định mệnh.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Fraunces:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #0a0906;
+  --bg-alt: #121009;
+  --surface: #17130c;
+  --surface-2: #1f1a10;
+  --border: #2b2417;
+  --text: #f5f1e8;
+  --text-dim: #b9b2a2;
+  --text-faint: #7d7666;
+  --gold: #f5c451;
+  --gold-2: #ffdd8a;
+  --orange: #ff8a1e;
+  --gradient-brand: linear-gradient(90deg, #ffdd8a 0%, #f5c451 35%, #ff8a1e 100%);
+  --gradient-surface: linear-gradient(160deg, #1c170e 0%, #100d08 100%);
+  --shadow-glow: 0 0 60px rgba(245, 196, 81, 0.12);
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 24px;
+  --container: 1180px;
+  --font: 'Be Vietnam Pro', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+}
+
+:root[data-theme="light"] {
+  --bg: #fbf8f2;
+  --bg-alt: #f3ede0;
+  --surface: #ffffff;
+  --surface-2: #f6f1e6;
+  --border: #e7ddc7;
+  --text: #201a0e;
+  --text-dim: #514a3a;
+  --text-faint: #8a8271;
+  --gradient-surface: linear-gradient(160deg, #ffffff 0%, #f3ede0 100%);
+  --shadow-glow: 0 0 60px rgba(245, 196, 81, 0.18);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  font-optical-sizing: auto;
+  overflow-x: hidden;
+  transition: background .3s ease, color .3s ease;
+}
+
+img, svg { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+input, textarea, select { font-family: inherit; }
+
+.container { width: 100%; max-width: var(--container); margin: 0 auto; padding: 0 24px; }
+
+.text-gradient {
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+section { position: relative; padding: 96px 0; }
+section.tight { padding: 64px 0; }
+
+.section-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 6px 16px; border: 1px solid var(--border); border-radius: 999px;
+  font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--gold); background: rgba(245, 196, 81, .06); margin-bottom: 18px;
+}
+
+.section-head { max-width: 680px; margin: 0 auto 56px; text-align: center; }
+.section-head h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 800; letter-spacing: -.01em; margin-bottom: 14px; text-wrap: balance; }
+.section-head p { color: var(--text-dim); font-size: 17px; }
+
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 14px 28px; border-radius: 999px; font-weight: 700; font-size: 15px;
+  transition: transform .2s ease, box-shadow .2s ease, opacity .2s ease; white-space: nowrap;
+}
+.btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.btn-primary { background: var(--gradient-brand); color: #1a1305; box-shadow: 0 10px 30px rgba(245, 196, 81, .25); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(245, 196, 81, .35); }
+.btn-outline { border: 1px solid var(--border); color: var(--text); background: rgba(255,255,255,.02); }
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+.btn-block { width: 100%; }
+.btn-sm { padding: 10px 18px; font-size: 14px; }
+
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(10, 9, 6, .72); backdrop-filter: blur(14px); border-bottom: 1px solid var(--border);
+}
+:root[data-theme="light"] .site-header { background: rgba(251, 248, 242, .82); }
+
+.header-inner { display: flex; align-items: center; justify-content: space-between; height: 76px; }
+.logo { display: flex; align-items: center; gap: 10px; font-family: var(--font-display); font-size: 21px; font-weight: 700; letter-spacing: .01em; }
+.logo-mark {
+  width: 34px; height: 34px; border-radius: 9px; background: var(--gradient-brand);
+  display: flex; align-items: center; justify-content: center; color: #1a1305; font-weight: 900; font-family: var(--font); font-size: 16px;
+}
+
+.main-nav { display: flex; align-items: center; gap: 4px; }
+.main-nav a { padding: 10px 16px; font-size: 15px; font-weight: 600; color: var(--text-dim); border-radius: 8px; transition: color .2s ease, background .2s ease; }
+.main-nav a:hover { color: var(--text); background: rgba(255,255,255,.04); }
+
+.header-actions { display: flex; align-items: center; gap: 10px; }
+.lang-switch { display: flex; align-items: center; border: 1px solid var(--border); border-radius: 999px; padding: 3px; font-size: 13px; font-weight: 700; }
+.lang-switch button { padding: 6px 12px; border-radius: 999px; color: var(--text-faint); }
+.lang-switch button.active { background: var(--gradient-brand); color: #1a1305; }
+
+.theme-toggle {
+  width: 38px; height: 38px; border: 1px solid var(--border); border-radius: 999px;
+  display: flex; align-items: center; justify-content: center; color: var(--text-dim);
+}
+.theme-toggle:hover { color: var(--gold); border-color: var(--gold); }
+.theme-toggle svg { width: 18px; height: 18px; }
+.theme-toggle .icon-moon { display: none; }
+:root[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+:root[data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+.nav-toggle { display: none; width: 40px; height: 40px; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
+.nav-toggle span { width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: transform .25s, opacity .25s; }
+.nav-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.active span:nth-child(2) { opacity: 0; }
+.nav-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.hero { padding: 168px 0 100px; position: relative; overflow: hidden; }
+.hero::before {
+  content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+  width: 900px; height: 600px; background: radial-gradient(ellipse at center, rgba(245,196,81,.16), transparent 70%); pointer-events: none;
+}
+.hero-bg-svg { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: min(900px, 130vw); height: auto; z-index: 0; pointer-events: none; }
+.hero-inner { text-align: center; position: relative; z-index: 1; }
+.hero h1 { font-size: clamp(32px, 5.4vw, 58px); font-weight: 800; line-height: 1.18; letter-spacing: -.015em; max-width: 900px; margin: 0 auto 22px; text-wrap: balance; }
+.hero-sub { max-width: 620px; margin: 0 auto 36px; font-size: 18px; color: var(--text-dim); }
+.hero-cta { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; margin-bottom: 24px; }
+.hero-note { font-size: 13px; color: var(--text-faint); margin-bottom: 72px; }
+
+.book-stack { display: flex; align-items: flex-end; justify-content: center; perspective: 1200px; margin-top: 20px; }
+.book {
+  position: relative; width: 150px; height: 220px; border-radius: 6px 10px 10px 6px;
+  background: var(--gradient-surface); border: 1px solid var(--border); box-shadow: -18px 20px 40px rgba(0,0,0,.5);
+  display: flex; flex-direction: column; justify-content: space-between; padding: 22px 16px;
+  transform: rotate(var(--r, 0deg)) translateY(var(--y, 0)); margin-left: -26px; transition: transform .35s ease;
+}
+.book:hover { transform: rotate(var(--r, 0deg)) translateY(calc(var(--y, 0px) - 10px)); }
+.book:nth-child(1) { --r: -9deg; --y: 10px; z-index: 1; }
+.book:nth-child(2) { --r: -3deg; --y: 0px; z-index: 2; }
+.book:nth-child(3) { --r: 0deg; --y: -18px; z-index: 4; width: 168px; height: 250px; box-shadow: 0 30px 60px rgba(0,0,0,.55); }
+.book:nth-child(4) { --r: 4deg; --y: 4px; z-index: 3; }
+.book:nth-child(5) { --r: 10deg; --y: 14px; z-index: 1; }
+.book .eyebrow { font-size: 9px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); font-weight: 700; }
+.book .title { font-family: var(--font-display); font-size: 17px; font-weight: 700; line-height: 1.15; color: var(--text); }
+.book .sub { font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--text-faint); font-weight: 700; }
+.book .glyph { align-self: center; width: 34px; height: 34px; border-radius: 50%; background: var(--gradient-brand); opacity: .9; }
+
+.stats-bar { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding: 40px 0; text-align: center; }
+.stat-num { font-size: clamp(26px, 3vw, 36px); font-weight: 800; font-family: var(--font-display); font-variant-numeric: tabular-nums; }
+.stat-label { color: var(--text-faint); font-size: 14px; margin-top: 6px; }
+
+.doors-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; }
+.door-card { background: var(--gradient-surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 28px 20px; transition: transform .25s ease, border-color .25s ease; }
+.door-card:hover { transform: translateY(-6px); border-color: var(--gold); }
+.door-num { font-family: var(--font-display); font-size: 34px; font-weight: 800; color: transparent; -webkit-text-stroke: 1.5px var(--gold); margin-bottom: 18px; }
+.door-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+.door-card p { font-size: 14px; color: var(--text-dim); }
+
+.course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+.course-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease; }
+.course-card:hover { transform: translateY(-6px); border-color: var(--gold); box-shadow: var(--shadow-glow); }
+.course-cover { position: relative; aspect-ratio: 4/3; background: var(--gradient-surface); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.course-cover::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 20%, rgba(245,196,81,.16), transparent 65%); }
+.course-num { position: relative; z-index: 1; font-family: var(--font-display); font-size: 60px; font-weight: 800; color: transparent; -webkit-text-stroke: 2px var(--gold); opacity: .8; }
+.course-badge {
+  position: absolute; top: 14px; left: 14px; z-index: 2; display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 12px; border-radius: 999px; font-size: 11.5px; font-weight: 700; letter-spacing: .02em;
+  background: rgba(10,9,6,.55); backdrop-filter: blur(6px); color: var(--text-dim); border: 1px solid var(--border);
+}
+.course-badge svg { width: 12px; height: 12px; flex-shrink: 0; }
+.course-badge--free, .course-badge--hot, .course-badge--popular { background: var(--gradient-brand); color: #1a1305; border-color: transparent; }
+.course-body { position: relative; padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.course-title { font-size: 16.5px; font-weight: 700; line-height: 1.3; }
+.course-meta { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-faint); }
+.course-meta svg { width: 14px; height: 14px; flex-shrink: 0; }
+.course-price-row { margin-top: auto; padding-top: 12px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.course-price { font-family: var(--font-display); font-weight: 800; font-size: 19px; font-variant-numeric: tabular-nums; }
+.course-price--free { color: var(--gold); }
+.course-link { font-size: 13px; font-weight: 700; color: var(--gold); white-space: nowrap; }
+.course-link:hover { color: var(--gold-2); }
+
+.mini-book { position: relative; z-index: 1; width: 78px; height: 108px; border-radius: 4px 8px 8px 4px; background: linear-gradient(160deg, #1c170e 0%, #100d08 100%); border: 1px solid var(--gold); box-shadow: -8px 10px 22px rgba(0,0,0,.5); display: flex; align-items: center; justify-content: center; padding: 10px; }
+.mini-book-title { font-family: var(--font-display); font-size: 11px; font-weight: 700; text-align: center; line-height: 1.25; color: var(--gold-2); }
+.mini-stack { position: relative; z-index: 1; width: 70px; height: 90px; }
+.mini-stack span { position: absolute; inset: 0; border-radius: 8px; background: var(--gradient-surface); border: 1px solid var(--border); }
+.mini-stack span:nth-child(1) { transform: rotate(-8deg) translate(-8px, 4px); }
+.mini-stack span:nth-child(2) { transform: rotate(4deg) translate(6px, 2px); }
+.mini-stack span:nth-child(3) { border-color: var(--gold); box-shadow: 0 10px 24px rgba(0,0,0,.4); }
+
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.split img, .split .media-block { border-radius: var(--radius-lg); }
+.media-block {
+  aspect-ratio: 4/3.4; background: var(--gradient-surface); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden;
+}
+.media-block::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 30% 20%, rgba(245,196,81,.18), transparent 60%); }
+.media-illustration { width: 62%; height: auto; z-index: 1; position: relative; }
+
+.split-body .section-tag { margin-bottom: 16px; }
+.split-body h2 { font-size: clamp(26px, 3.4vw, 36px); font-weight: 800; margin-bottom: 18px; line-height: 1.25; text-wrap: balance; }
+.split-body p { color: var(--text-dim); margin-bottom: 24px; }
+.check-list { display: flex; flex-direction: column; gap: 14px; margin-bottom: 28px; }
+.check-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; }
+.check-list .tick {
+  flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: rgba(245,196,81,.14);
+  color: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 12px; margin-top: 2px;
+}
+
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.price-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 36px 28px; display: flex; flex-direction: column; transition: transform .25s ease, border-color .25s ease; }
+.price-card:hover { transform: translateY(-6px); }
+.price-card.featured { border-color: var(--gold); background: linear-gradient(160deg, rgba(245,196,81,.08), var(--surface) 60%); box-shadow: var(--shadow-glow); position: relative; }
+.price-badge { position: absolute; top: -13px; left: 50%; transform: translateX(-50%); background: var(--gradient-brand); color: #1a1305; font-size: 12px; font-weight: 800; padding: 5px 16px; border-radius: 999px; white-space: nowrap; }
+.price-name { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--gold); margin-bottom: 10px; }
+.price-amount { font-family: var(--font-display); font-size: 40px; font-weight: 800; margin-bottom: 4px; font-variant-numeric: tabular-nums; }
+.price-amount span { font-size: 15px; font-weight: 500; color: var(--text-faint); }
+.price-old { font-size: 14px; color: var(--text-faint); text-decoration: line-through; margin-bottom: 20px; }
+.price-features { display: flex; flex-direction: column; gap: 12px; margin: 24px 0 28px; flex: 1; }
+.price-features li { display: flex; gap: 10px; font-size: 14px; color: var(--text-dim); align-items: flex-start; }
+.price-features .tick { color: var(--gold); flex-shrink: 0; }
+
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.testi-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 28px; }
+.stars { color: var(--gold); font-size: 14px; margin-bottom: 14px; letter-spacing: 2px; }
+.testi-quote { font-size: 15px; color: var(--text-dim); margin-bottom: 22px; }
+.testi-person { display: flex; align-items: center; gap: 12px; }
+.avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--gradient-brand); display: flex; align-items: center; justify-content: center; font-weight: 800; color: #1a1305; font-size: 15px; flex-shrink: 0; }
+.testi-person strong { font-size: 14px; display: block; }
+.testi-person span { font-size: 13px; color: var(--text-faint); }
+
+.partner-strip { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px; opacity: .8; }
+.partner-strip .p-logo { font-family: var(--font-display); font-weight: 700; font-size: 19px; color: var(--text-faint); letter-spacing: .02em; }
+.partner-cta { margin-top: 56px; background: var(--gradient-surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 48px; display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+.partner-cta h3 { font-size: 24px; font-weight: 800; margin-bottom: 8px; }
+.partner-cta p { color: var(--text-dim); max-width: 460px; }
+
+.faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+.faq-item { border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--surface); overflow: hidden; }
+.faq-q { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 24px; font-weight: 700; font-size: 15.5px; text-align: left; }
+.faq-q:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+.faq-q .plus { flex-shrink: 0; font-size: 20px; color: var(--gold); transition: transform .25s ease; }
+.faq-item.open .plus { transform: rotate(45deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+.faq-a-inner { padding: 0 24px 22px; color: var(--text-dim); font-size: 14.5px; }
+
+.cta-banner { background: var(--gradient-surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 64px 48px; text-align: center; position: relative; overflow: hidden; }
+.cta-banner::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 50% 0%, rgba(245,196,81,.16), transparent 60%); }
+.cta-banner h2 { font-size: clamp(24px, 3.4vw, 34px); font-weight: 800; margin-bottom: 14px; position: relative; text-wrap: balance; }
+.cta-banner p { color: var(--text-dim); max-width: 520px; margin: 0 auto 32px; position: relative; }
+.newsletter-form { display: flex; gap: 10px; max-width: 440px; margin: 0 auto; position: relative; flex-wrap: wrap; justify-content: center; }
+.newsletter-form input { flex: 1; min-width: 220px; padding: 14px 18px; border-radius: 999px; border: 1px solid var(--border); background: var(--bg-alt); color: var(--text); font-size: 14px; }
+.newsletter-form input:focus { outline: none; border-color: var(--gold); }
+
+.site-footer { background: var(--bg-alt); border-top: 1px solid var(--border); padding-top: 72px; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 56px; }
+.footer-brand p { color: var(--text-dim); font-size: 14px; margin: 16px 0 22px; max-width: 280px; }
+.social-row { display: flex; gap: 10px; }
+.social-row a { width: 36px; height: 36px; border: 1px solid var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--text-dim); }
+.social-row a:hover { color: var(--gold); border-color: var(--gold); }
+.footer-col h4 { font-size: 14px; font-weight: 700; margin-bottom: 18px; text-transform: uppercase; letter-spacing: .05em; color: var(--text-faint); }
+.footer-col ul { display: flex; flex-direction: column; gap: 12px; }
+.footer-col a { font-size: 14.5px; color: var(--text-dim); }
+.footer-col a:hover { color: var(--gold); }
+.footer-bottom { border-top: 1px solid var(--border); padding: 24px 0; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 13px; color: var(--text-faint); }
+.footer-bottom-links { display: flex; gap: 20px; }
+
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(4,3,1,.7); backdrop-filter: blur(4px);
+  display: flex; align-items: center; justify-content: center; z-index: 1000;
+  opacity: 0; pointer-events: none; transition: opacity .25s ease; padding: 20px;
+}
+.modal-overlay.active { opacity: 1; pointer-events: auto; }
+.modal-box {
+  width: 100%; max-width: 420px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 40px 32px 32px; position: relative; transform: translateY(16px) scale(.98); transition: transform .25s ease;
+  max-height: 90vh; overflow-y: auto;
+}
+.modal-overlay.active .modal-box { transform: translateY(0) scale(1); }
+.modal-close { position: absolute; top: 18px; right: 18px; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-faint); font-size: 18px; }
+.modal-close:hover { color: var(--text); background: rgba(255,255,255,.05); }
+.auth-tabs { display: flex; background: var(--bg-alt); border-radius: 999px; padding: 4px; margin-bottom: 28px; }
+.auth-tabs button { flex: 1; padding: 10px; border-radius: 999px; font-weight: 700; font-size: 14px; color: var(--text-faint); }
+.auth-tabs button.active { background: var(--gradient-brand); color: #1a1305; }
+.auth-panel { display: none; }
+.auth-panel.active { display: block; }
+.field { margin-bottom: 16px; }
+.field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; color: var(--text-dim); }
+.field input { width: 100%; padding: 12px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: var(--bg-alt); color: var(--text); font-size: 14.5px; }
+.field input:focus { outline: none; border-color: var(--gold); }
+.field-error { color: #ff6b6b; font-size: 12.5px; margin-top: 6px; display: none; }
+.field.invalid input { border-color: #ff6b6b; }
+.field.invalid .field-error { display: block; }
+.field-row-check { display: flex; align-items: center; gap: 8px; margin-bottom: 20px; font-size: 13.5px; color: var(--text-dim); }
+.auth-alt { text-align: center; font-size: 13.5px; color: var(--text-faint); margin-top: 18px; }
+.auth-alt button { color: var(--gold); font-weight: 700; }
+.auth-note { margin-top: 18px; font-size: 12px; color: var(--text-faint); background: rgba(245,196,81,.06); border: 1px solid var(--border); padding: 10px 14px; border-radius: var(--radius-sm); }
+
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px);
+  background: var(--surface); border: 1px solid var(--gold); color: var(--text); padding: 14px 22px;
+  border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; z-index: 1200;
+  opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s ease; box-shadow: 0 12px 30px rgba(0,0,0,.4);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+.preview-banner {
+  position: sticky; top: 76px; z-index: 90; text-align: center; font-size: 12.5px;
+  color: var(--text-faint); background: var(--bg-alt); border-bottom: 1px solid var(--border); padding: 8px 16px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+  html { scroll-behavior: auto; }
+}
+
+@media (max-width: 980px) {
+  .doors-grid { grid-template-columns: repeat(3, 1fr); }
+  .pricing-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 860px) {
+  .main-nav, .header-actions .btn-outline { display: none; }
+  .nav-toggle { display: flex; }
+  .split { grid-template-columns: 1fr; }
+  .testi-grid { grid-template-columns: 1fr; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+  .doors-grid { grid-template-columns: 1fr 1fr; }
+  .main-nav {
+    display: none; position: fixed; top: 76px; left: 0; right: 0; background: var(--bg);
+    border-bottom: 1px solid var(--border); flex-direction: column; align-items: stretch; padding: 12px 24px 24px; gap: 4px;
+  }
+  .main-nav.open { display: flex; }
+  .main-nav a { padding: 14px 8px; border-bottom: 1px solid var(--border); border-radius: 0; }
+}
+
+@media (max-width: 640px) {
+  .doors-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .partner-cta { flex-direction: column; text-align: center; }
+  .book-stack { transform: scale(.72); margin-top: -20px; margin-bottom: -30px; }
+  section { padding: 64px 0; }
+  .hero { padding-top: 140px; }
+}
+</style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="/hoc-vien/" class="logo"><span class="logo-mark">ĐA</span><span>Tự Do Thịnh Vượng</span></a>
-      <div class="header-actions" id="header-actions">
-        <a href="/hoc-vien/dashboard.html" class="btn btn-outline btn-sm" id="dashboard-link" style="display:none">Bài giảng của tôi</a>
-        <button class="btn btn-outline btn-sm" id="logout-btn" style="display:none">Đăng xuất</button>
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="#top" class="logo">
+      <span class="logo-mark">ĐA</span>
+      <span>Tự Do Thịnh Vượng</span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="#hoc-vien" data-i18n="nav.academy">Học Viện</a>
+      <a href="#khoa-hoc" data-i18n="nav.courses">Khóa Học</a>
+      <a href="#san-pham" data-i18n="nav.products">Sản Phẩm</a>
+      <a href="#doi-tac" data-i18n="nav.partners">Đối Tác</a>
+      <a href="#faq" data-i18n="nav.faq">Hỏi Đáp</a>
+    </nav>
+    <div class="header-actions">
+      <div class="lang-switch" id="langSwitch">
+        <button data-lang="vi" class="active">VI</button>
+        <button data-lang="en">EN</button>
       </div>
-    </div>
-  </header>
-
-  <main class="container">
-    <div class="page-head">
-      <h1>Kho Mật Mã</h1>
-      <p>Chọn mật mã bạn muốn mở khoá. Thanh toán qua chuyển khoản ngân hàng, admin xác nhận trong vài giờ.</p>
-    </div>
-
-    <div class="card" id="auth-card" style="max-width:420px; margin-bottom:36px">
-      <div class="tabs">
-        <button data-tab="login" class="active">Đăng nhập</button>
-        <button data-tab="register">Đăng ký</button>
-      </div>
-
-      <form class="tab-panel active" id="login-form">
-        <div class="form-group">
-          <label class="form-label">Email</label>
-          <input type="email" name="email" class="form-control" required placeholder="ban@email.com">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Mật khẩu</label>
-          <input type="password" name="password" class="form-control" required minlength="6" placeholder="••••••••">
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Đăng Nhập</button>
-      </form>
-
-      <form class="tab-panel" id="register-form">
-        <div class="form-group">
-          <label class="form-label">Họ và tên</label>
-          <input type="text" name="fullName" class="form-control" required placeholder="Nguyễn Văn A">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Email</label>
-          <input type="email" name="email" class="form-control" required placeholder="ban@email.com">
-        </div>
-        <div class="form-group">
-          <label class="form-label">Mật khẩu</label>
-          <input type="password" name="password" class="form-control" required minlength="6" placeholder="Tối thiểu 6 ký tự">
-        </div>
-        <button type="submit" class="btn btn-primary btn-block">Tạo Tài Khoản</button>
-      </form>
-    </div>
-
-    <div class="card" id="welcome-card" style="display:none; max-width:420px; margin-bottom:36px">
-      <p style="margin-bottom:12px">Xin chào, <strong id="welcome-email"></strong> 👋</p>
-      <a href="/hoc-vien/dashboard.html" class="btn btn-primary btn-block">Vào trang Bài giảng của tôi</a>
-    </div>
-
-    <div class="grid grid-cards" id="course-grid">
-      <div class="empty-state">Đang tải khoá học...</div>
-    </div>
-  </main>
-
-  <div class="toast-container" id="toast-container"></div>
-
-  <!-- Modal hướng dẫn chuyển khoản -->
-  <div id="order-modal" style="display:none; position:fixed; inset:0; background:rgba(4,3,1,.7); z-index:100; align-items:center; justify-content:center; padding:20px">
-    <div class="card" style="max-width:420px; width:100%">
-      <h3 style="font-family:var(--font-display); font-size:19px; margin-bottom:14px">Hướng dẫn chuyển khoản</h3>
-      <div class="order-note" id="order-note"></div>
-      <button class="btn btn-outline btn-block" id="order-modal-close" style="margin-top:16px">Đóng</button>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1111.2 3 7 7 0 0021 12.8z"></path></svg>
+      </button>
+      <button class="btn btn-outline btn-sm" id="loginNavBtn" data-open-auth="login" data-i18n="nav.login">Đăng nhập</button>
+      <button class="btn btn-primary btn-sm" id="registerNavBtn" data-open-auth="register" data-i18n="nav.register">Đăng ký</button>
+      <a href="/hoc-vien/dashboard.html" class="btn btn-outline btn-sm" id="dashboardNavLink" style="display:none">Bài giảng của tôi</a>
+      <button class="btn btn-outline btn-sm" id="logoutNavBtn" style="display:none">Đăng xuất</button>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
+</header>
 
-  <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-  <script src="js/supabase-init.js"></script>
-  <script src="js/app.js"></script>
+<main id="top">
+
+  <section class="hero">
+    <svg class="hero-bg-svg" viewBox="0 0 900 560" aria-hidden="true">
+      <defs>
+        <linearGradient id="heroGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#ffdd8a"></stop>
+          <stop offset="45%" stop-color="#f5c451"></stop>
+          <stop offset="100%" stop-color="#ff8a1e"></stop>
+        </linearGradient>
+        <radialGradient id="heroGlow" cx="50%" cy="30%" r="60%">
+          <stop offset="0%" stop-color="#f5c451" stop-opacity="0.35"></stop>
+          <stop offset="100%" stop-color="#f5c451" stop-opacity="0"></stop>
+        </radialGradient>
+      </defs>
+      <circle cx="450" cy="170" r="260" fill="url(#heroGlow)"></circle>
+      <path d="M330 500 V230 Q330 130 450 130 Q570 130 570 230 V500" fill="none" stroke="url(#heroGrad)" stroke-width="2.5" stroke-opacity="0.55"></path>
+      <path d="M300 500 V210 Q300 90 450 90 Q600 90 600 210 V500" fill="none" stroke="url(#heroGrad)" stroke-width="1.4" stroke-opacity="0.3"></path>
+      <g stroke="url(#heroGrad)" stroke-width="1.2" stroke-opacity="0.4">
+        <line x1="450" y1="90" x2="450" y2="20"></line>
+        <line x1="450" y1="90" x2="390" y2="30"></line>
+        <line x1="450" y1="90" x2="510" y2="30"></line>
+        <line x1="450" y1="90" x2="330" y2="55"></line>
+        <line x1="450" y1="90" x2="570" y2="55"></line>
+      </g>
+      <g fill="url(#heroGrad)" fill-opacity="0.8">
+        <circle cx="450" cy="20" r="4"></circle>
+        <circle cx="390" cy="30" r="3"></circle>
+        <circle cx="510" cy="30" r="3"></circle>
+        <circle cx="330" cy="55" r="3"></circle>
+        <circle cx="570" cy="55" r="3"></circle>
+        <circle cx="230" cy="250" r="3"></circle>
+        <circle cx="670" cy="250" r="3"></circle>
+        <circle cx="180" cy="380" r="2.5"></circle>
+        <circle cx="720" cy="380" r="2.5"></circle>
+      </g>
+      <g stroke="url(#heroGrad)" stroke-width="1" stroke-opacity="0.25">
+        <line x1="230" y1="250" x2="300" y2="300"></line>
+        <line x1="670" y1="250" x2="600" y2="300"></line>
+        <line x1="180" y1="380" x2="300" y2="420"></line>
+        <line x1="720" y1="380" x2="600" y2="420"></line>
+      </g>
+    </svg>
+    <div class="container hero-inner">
+      <span class="section-tag">✦ <span data-i18n="hero.tag">Mật Mã Tự Do — Affiliate x AI</span></span>
+      <h1>
+        <span data-i18n="hero.h1a">5 Cánh Cửa</span> <span class="text-gradient" data-i18n="hero.h1b">Định Mệnh</span><br>
+        <span data-i18n="hero.h1c">Làm Chủ Hệ Thống</span> <span class="text-gradient" data-i18n="hero.h1d">Affiliate x AI</span><br>
+        <span data-i18n="hero.h1e">Mở Ra</span> <span class="text-gradient" data-i18n="hero.h1f">Cánh Cửa Tự Do</span>
+      </h1>
+      <p class="hero-sub" data-i18n="hero.sub">Hệ thống 5 bước giúp người mới bắt đầu xây dựng thu nhập thụ động từ Affiliate Marketing, tận dụng sức mạnh của AI để tự động hóa toàn bộ quy trình — không cần kinh nghiệm, không cần vốn lớn.</p>
+      <div class="hero-cta">
+        <button class="btn btn-primary" data-open-auth="register" data-i18n="hero.ctaPrimary">Khám Phá Ngay</button>
+        <a href="#hoc-vien" class="btn btn-outline" data-i18n="hero.ctaSecondary">Xem Chương Trình</a>
+      </div>
+      <p class="hero-note" data-i18n="hero.note">Miễn phí tài liệu "Mật Mã Tự Do" khi đăng ký hôm nay · Không cần thẻ tín dụng</p>
+      <div class="book-stack" aria-hidden="true">
+        <div class="book"><span class="eyebrow">START AI</span><span class="glyph"></span><span class="sub">Vol. 01</span></div>
+        <div class="book"><span class="eyebrow">MẬT MÃ</span><span class="glyph"></span><span class="sub">Vol. 02</span></div>
+        <div class="book"><span class="eyebrow">MẬT MÃ TỰ DO</span><span class="title">Affiliate<br>+ AI</span><span class="sub">Bestseller</span></div>
+        <div class="book"><span class="eyebrow">MẬT MÃ</span><span class="glyph"></span><span class="sub">Vol. 03</span></div>
+        <div class="book"><span class="eyebrow">TỰ DO</span><span class="glyph"></span><span class="sub">Vol. 04</span></div>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="hoc-vien">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-tag" data-i18n="doors.tag">Lộ trình học viện</span>
+        <h2 data-i18n="doors.title">5 Cánh Cửa Trên Hành Trình Tự Do</h2>
+        <p data-i18n="doors.desc">Mỗi cánh cửa là một cột mốc — đi qua đủ 5 cửa, bạn sở hữu một hệ thống Affiliate x AI vận hành gần như tự động.</p>
+      </div>
+      <div class="doors-grid">
+        <div class="door-card reveal"><div class="door-num">01</div><h3 data-i18n="doors.d1.title">Tư Duy Người Chơi Mới</h3><p data-i18n="doors.d1.desc">Định hình tư duy đúng về Affiliate Marketing, gỡ bỏ hiểu lầm và xây nền tảng vững chắc.</p></div>
+        <div class="door-card reveal"><div class="door-num">02</div><h3 data-i18n="doors.d2.title">Chọn Ngách Sinh Lời</h3><p data-i18n="doors.d2.desc">Phương pháp chọn thị trường ngách tiềm năng, ít cạnh tranh, phù hợp năng lực của bạn.</p></div>
+        <div class="door-card reveal"><div class="door-num">03</div><h3 data-i18n="doors.d3.title">Xây Kênh &amp; Nội Dung</h3><p data-i18n="doors.d3.desc">Dựng kênh nội dung chuyên nghiệp, thu hút đúng tệp khách hàng mục tiêu.</p></div>
+        <div class="door-card reveal"><div class="door-num">04</div><h3 data-i18n="doors.d4.title">Tự Động Hóa Với AI</h3><p data-i18n="doors.d4.desc">Dùng AI để viết nội dung, chăm sóc khách hàng và tối ưu chuyển đổi 24/7.</p></div>
+        <div class="door-card reveal"><div class="door-num">05</div><h3 data-i18n="doors.d5.title">Nhân Bản Hệ Thống</h3><p data-i18n="doors.d5.desc">Scale hệ thống thu nhập lên nhiều kênh, nhiều sản phẩm, tiến tới tự do tài chính.</p></div>
+      </div>
+    </div>
+  </section>
+  <section id="khoa-hoc" class="tight">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-tag" data-i18n="catalog.tag">Kho mật mã</span>
+        <h2 data-i18n="catalog.title">Mỗi Cánh Cửa — Một Mật Mã Riêng</h2>
+        <p data-i18n="catalog.desc">Học từng mật mã theo tốc độ của riêng bạn, hoặc sở hữu trọn bộ để đi hết hành trình 5 cánh cửa.</p>
+      </div>
+      <div class="course-grid" id="course-grid"><div class="empty-state" style="grid-column:1/-1; text-align:center; padding:40px; color:var(--text-faint)">Đang tải khoá học...</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container split">
+      <div class="media-block reveal">
+        <svg class="media-illustration" viewBox="0 0 240 240" aria-hidden="true">
+          <defs>
+            <linearGradient id="aboutGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ffdd8a"></stop>
+              <stop offset="50%" stop-color="#f5c451"></stop>
+              <stop offset="100%" stop-color="#ff8a1e"></stop>
+            </linearGradient>
+          </defs>
+          <rect x="70" y="40" width="100" height="160" rx="10" fill="none" stroke="url(#aboutGrad)" stroke-width="3"></rect>
+          <path d="M120 40 V200" stroke="url(#aboutGrad)" stroke-width="1.5" stroke-opacity="0.4"></path>
+          <circle cx="150" cy="118" r="4" fill="url(#aboutGrad)"></circle>
+          <circle cx="120" cy="120" r="46" fill="url(#aboutGrad)" fill-opacity="0.14"></circle>
+          <g stroke="url(#aboutGrad)" stroke-width="1.6" stroke-linecap="round">
+            <line x1="120" y1="90" x2="120" y2="150"></line>
+            <line x1="90" y1="120" x2="150" y2="120"></line>
+            <line x1="99" y1="99" x2="141" y2="141"></line>
+            <line x1="141" y1="99" x2="99" y2="141"></line>
+          </g>
+          <g fill="url(#aboutGrad)">
+            <circle cx="120" cy="90" r="5"></circle>
+            <circle cx="120" cy="150" r="5"></circle>
+            <circle cx="90" cy="120" r="5"></circle>
+            <circle cx="150" cy="120" r="5"></circle>
+            <circle cx="99" cy="99" r="4"></circle>
+            <circle cx="141" cy="141" r="4"></circle>
+            <circle cx="141" cy="99" r="4"></circle>
+            <circle cx="99" cy="141" r="4"></circle>
+          </g>
+        </svg>
+      </div>
+      <div class="split-body reveal">
+        <span class="section-tag" data-i18n="about.tag">Về học viện</span>
+        <h2 data-i18n="about.title">Tự Do Thịnh Vượng - Đậu Ánh AI — Nơi Bắt Đầu Của Những Ai Muốn Chủ Động Cuộc Sống</h2>
+        <p data-i18n="about.desc">Chúng tôi không bán "làm giàu nhanh" — chúng tôi trao cho bạn hệ thống, công cụ AI và cộng đồng để tự xây dựng thu nhập bền vững từ Affiliate Marketing.</p>
+        <ul class="check-list">
+          <li class="reveal"><span class="tick">✓</span><span data-i18n="about.p1">Giáo trình thực chiến, cập nhật theo xu hướng AI mới nhất</span></li>
+          <li class="reveal"><span class="tick">✓</span><span data-i18n="about.p2">Mentor đồng hành 1-1 trong suốt quá trình học</span></li>
+          <li class="reveal"><span class="tick">✓</span><span data-i18n="about.p3">Cộng đồng học viên hỗ trợ lẫn nhau 24/7</span></li>
+          <li class="reveal"><span class="tick">✓</span><span data-i18n="about.p4">Bộ công cụ AI độc quyền giúp rút ngắn 80% thời gian làm việc</span></li>
+        </ul>
+        <a href="#san-pham" class="btn btn-primary" data-i18n="about.cta">Xem Lộ Trình Học</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="san-pham">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-tag" data-i18n="pricing.tag">Sản phẩm</span>
+        <h2 data-i18n="pricing.title">Chọn Gói Phù Hợp Với Bạn</h2>
+        <p data-i18n="pricing.desc">Bắt đầu miễn phí, nâng cấp bất cứ lúc nào khi bạn sẵn sàng đi xa hơn.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="price-card reveal">
+          <div class="price-name" data-i18n="pricing.p1.name">Khởi Đầu</div>
+          <div class="price-amount">0đ</div>
+          <div class="price-old" data-i18n="pricing.free">Miễn phí trọn đời</div>
+          <ul class="price-features">
+            <li><span class="tick">✓</span><span data-i18n="pricing.p1.f1">Ebook "Mật Mã Tự Do"</span></li>
+            <li><span class="tick">✓</span><span data-i18n="pricing.p1.f2">3 bài giảng nền tảng</span></li>
+            <li><span class="tick">✓</span><span data-i18n="pricing.p1.f3">Cộng đồng học viên</span></li>
+          </ul>
+          <button class="btn btn-outline btn-block" data-open-auth="register" data-i18n="pricing.p1.cta">Bắt Đầu Miễn Phí</button>
+        </div>
+        <div class="price-card featured reveal">
+          <span class="price-badge" data-i18n="pricing.popular">Phổ biến nhất</span>
+          <div class="price-name" data-i18n="pricing.p2.name">Cánh Cửa Tự Do</div>
+          <div class="price-amount">2.990.000đ <span data-i18n="pricing.oneTime">/ trọn khóa</span></div>
+          <div class="price-old">5.990.000đ</div>
+          <ul class="price-features">
+            <li><span class="tick">✓</span><span data-i18n="pricing.p2.f1">Toàn bộ 5 cánh cửa lộ trình</span></li>
+            <li><span class="tick">✓</span><span data-i18n="pricing.p2.f2">Bộ công cụ AI độc quyền</span></li>
+            <li><span class="tick">✓</span><span data-i18n="pricing.p2.f3">Mentor đồng hành 1-1</span></li>
+            <li><span class="tick">✓</span><span data-i18n="pricing.p2.f4">Cập nhật giáo trình trọn đời</span></li>
+          </ul>
+          <button class="btn btn-primary btn-block" data-open-auth="register" data-i18n="pricing.p2.cta">Đăng Ký Ngay</button>
+        </div>
+        <div class="price-card reveal">
+          <div class="price-name" data-i18n="pricing.p3.name">Đối Tác VIP</div>
+          <div class="price-amount">9.990.000đ <span data-i18n="pricing.oneTime">/ trọn khóa</span></div>
+          <div class="price-old" data-i18n="pricing.p3.old">Bao gồm mọi quyền lợi gói giữa</div>
+          <ul class="price-features">
+            <li><span class="tick">✓</span><span data-i18n="pricing.p3.f1">Tất cả quyền lợi gói Cánh Cửa Tự Do</span></li>
+            <li><span class="tick">✓</span><span data-i18n="pricing.p3.f2">Coaching nhóm nhỏ hàng tuần</span></li>
+            <li><span class="tick">✓</span><span data-i18n="pricing.p3.f3">Tham gia chương trình Đối Tác</span></li>
+            <li><span class="tick">✓</span><span data-i18n="pricing.p3.f4">Hoa hồng giới thiệu đến 40%</span></li>
+          </ul>
+          <button class="btn btn-outline btn-block" data-open-auth="register" data-i18n="pricing.p3.cta">Liên Hệ Tư Vấn</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <section id="doi-tac">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-tag" data-i18n="partners.tag">Đối tác</span>
+        <h2 data-i18n="partners.title">Cùng Chúng Tôi Xây Dựng Cộng Đồng Tự Do</h2>
+        <p data-i18n="partners.desc">Học viện tự hào đồng hành cùng các nền tảng và cộng đồng uy tín trong lĩnh vực Affiliate &amp; AI.</p>
+      </div>
+      <div class="partner-strip reveal">
+        <span class="p-logo">NovaAff</span>
+        <span class="p-logo">MindTrack</span>
+        <span class="p-logo">AICore Labs</span>
+        <span class="p-logo">GrowthDeck</span>
+        <span class="p-logo">PixelReach</span>
+      </div>
+      <div class="partner-cta reveal">
+        <div>
+          <h3 data-i18n="partners.ctaTitle">Trở Thành Đối Tác Giới Thiệu</h3>
+          <p data-i18n="partners.ctaDesc">Kiếm hoa hồng lên đến 40% khi giới thiệu học viên mới tham gia học viện — không giới hạn số lượng.</p>
+        </div>
+        <button class="btn btn-primary" data-open-auth="register" data-i18n="partners.ctaBtn">Đăng Ký Làm Đối Tác</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq" class="tight">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="section-tag" data-i18n="faq.tag">Hỏi đáp</span>
+        <h2 data-i18n="faq.title">Câu Hỏi Thường Gặp</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal">
+          <button class="faq-q"><span data-i18n="faq.q1">Tôi chưa có kinh nghiệm gì về Affiliate, có học được không?</span><span class="plus">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a1">Hoàn toàn được. Lộ trình 5 cánh cửa được thiết kế từ số 0, phù hợp cho người mới bắt đầu hoàn toàn.</div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q"><span data-i18n="faq.q2">Cần bao nhiêu vốn để bắt đầu?</span><span class="plus">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a2">Bạn có thể bắt đầu với gói miễn phí và số vốn gần như bằng 0, chỉ cần thời gian và sự kiên trì.</div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q"><span data-i18n="faq.q3">Tôi có được hỗ trợ sau khi mua khóa học không?</span><span class="plus">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a3">Có. Mọi học viên gói Cánh Cửa Tự Do trở lên đều có mentor đồng hành 1-1 và cộng đồng hỗ trợ 24/7.</div></div>
+        </div>
+        <div class="faq-item reveal">
+          <button class="faq-q"><span data-i18n="faq.q4">Có được hoàn tiền nếu không phù hợp không?</span><span class="plus">+</span></button>
+          <div class="faq-a"><div class="faq-a-inner" data-i18n="faq.a4">Chúng tôi có chính sách hoàn tiền trong 7 ngày đầu tiên nếu bạn cảm thấy chương trình không phù hợp.</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tight">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <h2 data-i18n="cta.title">Nhận Ngay Ebook "Mật Mã Tự Do" Miễn Phí</h2>
+        <p data-i18n="cta.desc">Để lại email để nhận tài liệu và cập nhật mới nhất từ học viện — không spam, hủy đăng ký bất cứ lúc nào.</p>
+        <form class="newsletter-form" id="newsletterForm">
+          <input type="email" required placeholder="Nhập email của bạn" data-i18n-placeholder="cta.placeholder">
+          <button type="submit" class="btn btn-primary" data-i18n="cta.btn">Nhận Ngay</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a href="#top" class="logo"><span class="logo-mark">ĐA</span><span>Tự Do Thịnh Vượng</span></a>
+      <p data-i18n="footer.desc">Học viện Affiliate x AI giúp bạn xây dựng hệ thống thu nhập tự động và làm chủ thời gian của chính mình.</p>
+      <div class="social-row">
+        <a href="#" aria-label="Facebook">f</a>
+        <a href="#" aria-label="YouTube">▶</a>
+        <a href="#" aria-label="TikTok">♪</a>
+        <a href="#" aria-label="Zalo">Z</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer.explore">Khám phá</h4>
+      <ul>
+        <li><a href="#hoc-vien" data-i18n="nav.academy">Học Viện</a></li>
+        <li><a href="#san-pham" data-i18n="nav.products">Sản Phẩm</a></li>
+        <li><a href="#doi-tac" data-i18n="nav.partners">Đối Tác</a></li>
+        <li><a href="#faq" data-i18n="nav.faq">Hỏi Đáp</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer.company">Công ty</h4>
+      <ul>
+        <li><a href="#" data-i18n="footer.about">Về chúng tôi</a></li>
+        <li><a href="#" data-i18n="footer.blog">Blog</a></li>
+        <li><a href="#" data-i18n="footer.careers">Tuyển dụng</a></li>
+        <li><a href="#" data-i18n="footer.contact">Liên hệ</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4 data-i18n="footer.legal">Pháp lý</h4>
+      <ul>
+        <li><a href="#" data-i18n="footer.terms">Điều khoản sử dụng</a></li>
+        <li><a href="#" data-i18n="footer.privacy">Chính sách bảo mật</a></li>
+        <li><a href="#" data-i18n="footer.refund">Chính sách hoàn tiền</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span data-i18n="footer.copyright">© 2026 Tự Do Thịnh Vượng - Đậu Ánh AI. Bảo lưu mọi quyền.</span>
+    <div class="footer-bottom-links">
+      <a href="#" data-i18n="footer.terms">Điều khoản</a>
+      <a href="#" data-i18n="footer.privacy">Bảo mật</a>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="authModal">
+  <div class="modal-box">
+    <button class="modal-close" id="authClose">✕</button>
+    <div class="auth-tabs">
+      <button data-tab="login" class="active" data-i18n="auth.loginTab">Đăng nhập</button>
+      <button data-tab="register" data-i18n="auth.registerTab">Đăng ký</button>
+    </div>
+    <form class="auth-panel active" id="loginPanel" novalidate>
+      <div class="field" data-field="email">
+        <label data-i18n="auth.email">Email</label>
+        <input type="email" name="email" required placeholder="ban@email.com">
+        <span class="field-error" data-i18n="auth.errEmail">Vui lòng nhập email hợp lệ</span>
+      </div>
+      <div class="field" data-field="password">
+        <label data-i18n="auth.password">Mật khẩu</label>
+        <input type="password" name="password" required minlength="6" placeholder="••••••••">
+        <span class="field-error" data-i18n="auth.errPassword">Mật khẩu tối thiểu 6 ký tự</span>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" data-i18n="auth.loginBtn">Đăng Nhập</button>
+      <p class="auth-alt" data-i18n="auth.noAccount">Chưa có tài khoản? <button type="button" data-switch-tab="register" data-i18n="auth.registerNow">Đăng ký ngay</button></p>
+    </form>
+    <form class="auth-panel" id="registerPanel" novalidate>
+      <div class="field" data-field="name">
+        <label data-i18n="auth.name">Họ và tên</label>
+        <input type="text" name="name" required placeholder="Nguyễn Văn A">
+        <span class="field-error" data-i18n="auth.errName">Vui lòng nhập họ tên</span>
+      </div>
+      <div class="field" data-field="email">
+        <label data-i18n="auth.email">Email</label>
+        <input type="email" name="email" required placeholder="ban@email.com">
+        <span class="field-error" data-i18n="auth.errEmail">Vui lòng nhập email hợp lệ</span>
+      </div>
+      <div class="field" data-field="password">
+        <label data-i18n="auth.password">Mật khẩu</label>
+        <input type="password" name="password" required minlength="6" placeholder="••••••••">
+        <span class="field-error" data-i18n="auth.errPassword">Mật khẩu tối thiểu 6 ký tự</span>
+      </div>
+      <div class="field-row-check">
+        <input type="checkbox" required id="agreeTerms">
+        <label for="agreeTerms" data-i18n="auth.agree">Tôi đồng ý với Điều khoản sử dụng &amp; Chính sách bảo mật</label>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block" data-i18n="auth.registerBtn">Tạo Tài Khoản</button>
+      <p class="auth-alt" data-i18n="auth.haveAccount">Đã có tài khoản? <button type="button" data-switch-tab="login" data-i18n="auth.loginNow">Đăng nhập</button></p>
+    </form>
+  </div>
+</div>
+
+<div class="modal-overlay" id="orderModal">
+  <div class="modal-box" style="max-width:480px">
+    <button class="modal-close" id="orderClose">✕</button>
+    <h3 style="font-family:var(--font-display); font-size:20px; margin-bottom:16px">Hướng dẫn chuyển khoản</h3>
+    <div id="orderNote" style="font-size:14.5px; line-height:1.8; color:var(--text-dim)"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="js/supabase-init.js"></script>
+<script>
+const TRANSLATIONS = {
+  vi: {
+    "nav.academy": "Học Viện", "nav.courses": "Khóa Học", "nav.products": "Sản Phẩm", "nav.partners": "Đối Tác", "nav.faq": "Hỏi Đáp", "nav.login": "Đăng nhập", "nav.register": "Đăng ký",
+    "hero.tag": "Mật Mã Tự Do — Affiliate x AI",
+    "hero.h1a": "5 Cánh Cửa", "hero.h1b": "Định Mệnh", "hero.h1c": "Làm Chủ Hệ Thống", "hero.h1d": "Affiliate x AI", "hero.h1e": "Mở Ra", "hero.h1f": "Cánh Cửa Tự Do",
+    "hero.sub": "Hệ thống 5 bước giúp người mới bắt đầu xây dựng thu nhập thụ động từ Affiliate Marketing, tận dụng sức mạnh của AI để tự động hóa toàn bộ quy trình — không cần kinh nghiệm, không cần vốn lớn.",
+    "hero.ctaPrimary": "Khám Phá Ngay", "hero.ctaSecondary": "Xem Chương Trình",
+    "hero.note": "Miễn phí tài liệu \"Mật Mã Tự Do\" khi đăng ký hôm nay · Không cần thẻ tín dụng",
+    "stats.students": "Học viên đã tham gia", "stats.countries": "Quốc gia tiếp cận", "stats.satisfaction": "% học viên hài lòng", "stats.doors": "Cánh cửa lộ trình",
+    "doors.tag": "Lộ trình học viện", "doors.title": "5 Cánh Cửa Trên Hành Trình Tự Do",
+    "doors.desc": "Mỗi cánh cửa là một cột mốc — đi qua đủ 5 cửa, bạn sở hữu một hệ thống Affiliate x AI vận hành gần như tự động.",
+    "doors.d1.title": "Tư Duy Người Chơi Mới", "doors.d1.desc": "Định hình tư duy đúng về Affiliate Marketing, gỡ bỏ hiểu lầm và xây nền tảng vững chắc.",
+    "doors.d2.title": "Chọn Ngách Sinh Lời", "doors.d2.desc": "Phương pháp chọn thị trường ngách tiềm năng, ít cạnh tranh, phù hợp năng lực của bạn.",
+    "doors.d3.title": "Xây Kênh & Nội Dung", "doors.d3.desc": "Dựng kênh nội dung chuyên nghiệp, thu hút đúng tệp khách hàng mục tiêu.",
+    "doors.d4.title": "Tự Động Hóa Với AI", "doors.d4.desc": "Dùng AI để viết nội dung, chăm sóc khách hàng và tối ưu chuyển đổi 24/7.",
+    "doors.d5.title": "Nhân Bản Hệ Thống", "doors.d5.desc": "Scale hệ thống thu nhập lên nhiều kênh, nhiều sản phẩm, tiến tới tự do tài chính.",
+    "catalog.tag": "Kho mật mã", "catalog.title": "Mỗi Cánh Cửa — Một Mật Mã Riêng",
+    "catalog.desc": "Học từng mật mã theo tốc độ của riêng bạn, hoặc sở hữu trọn bộ để đi hết hành trình 5 cánh cửa.",
+    "catalog.badge.free": "Miễn phí", "catalog.badge.hot": "Bán chạy", "catalog.badge.popular": "Phổ biến nhất",
+    "catalog.ebook.title": "Ebook Mật Mã Tự Do", "catalog.ebook.meta": "48 trang · Đọc ngay", "catalog.ebook.spine": "MẬT MÃ TỰ DO",
+    "catalog.free": "0đ", "catalog.cta": "Nhận ngay →", "catalog.cta2": "Xem chi tiết →",
+    "catalog.c1.title": "Mật Mã Tư Duy", "catalog.c1.meta": "5 bài học", "catalog.c1.price": "99.000đ",
+    "catalog.c2.title": "Mật Mã Chọn Ngách", "catalog.c2.meta": "6 bài học", "catalog.c2.price": "149.000đ",
+    "catalog.c3.title": "Mật Mã Nội Dung", "catalog.c3.meta": "7 bài học", "catalog.c3.price": "199.000đ",
+    "catalog.c4.title": "Mật Mã Tự Động Hoá AI", "catalog.c4.meta": "8 bài học", "catalog.c4.price": "249.000đ",
+    "catalog.c5.title": "Mật Mã Nhân Bản", "catalog.c5.meta": "6 bài học", "catalog.c5.price": "299.000đ",
+    "catalog.bundle.title": "Trọn Bộ 5 Mật Mã", "catalog.bundle.meta": "32 bài học · Mentor 1-1",
+    "catalog.bundle.note": "Có trong gói Cánh Cửa Tự Do", "catalog.bundle.cta": "Xem ưu đãi →",
+    "about.tag": "Về học viện", "about.title": "Tự Do Thịnh Vượng - Đậu Ánh AI — Nơi Bắt Đầu Của Những Ai Muốn Chủ Động Cuộc Sống",
+    "about.desc": "Chúng tôi không bán \"làm giàu nhanh\" — chúng tôi trao cho bạn hệ thống, công cụ AI và cộng đồng để tự xây dựng thu nhập bền vững từ Affiliate Marketing.",
+    "about.p1": "Giáo trình thực chiến, cập nhật theo xu hướng AI mới nhất", "about.p2": "Mentor đồng hành 1-1 trong suốt quá trình học",
+    "about.p3": "Cộng đồng học viên hỗ trợ lẫn nhau 24/7", "about.p4": "Bộ công cụ AI độc quyền giúp rút ngắn 80% thời gian làm việc", "about.cta": "Xem Lộ Trình Học",
+    "pricing.tag": "Sản phẩm", "pricing.title": "Chọn Gói Phù Hợp Với Bạn", "pricing.desc": "Bắt đầu miễn phí, nâng cấp bất cứ lúc nào khi bạn sẵn sàng đi xa hơn.",
+    "pricing.free": "Miễn phí trọn đời", "pricing.popular": "Phổ biến nhất", "pricing.oneTime": "/ trọn khóa",
+    "pricing.p1.name": "Khởi Đầu", "pricing.p1.f1": "Ebook \"Mật Mã Tự Do\"", "pricing.p1.f2": "3 bài giảng nền tảng", "pricing.p1.f3": "Cộng đồng học viên", "pricing.p1.cta": "Bắt Đầu Miễn Phí",
+    "pricing.p2.name": "Cánh Cửa Tự Do", "pricing.p2.f1": "Toàn bộ 5 cánh cửa lộ trình", "pricing.p2.f2": "Bộ công cụ AI độc quyền", "pricing.p2.f3": "Mentor đồng hành 1-1", "pricing.p2.f4": "Cập nhật giáo trình trọn đời", "pricing.p2.cta": "Đăng Ký Ngay",
+    "pricing.p3.name": "Đối Tác VIP", "pricing.p3.old": "Bao gồm mọi quyền lợi gói giữa", "pricing.p3.f1": "Tất cả quyền lợi gói Cánh Cửa Tự Do", "pricing.p3.f2": "Coaching nhóm nhỏ hàng tuần", "pricing.p3.f3": "Tham gia chương trình Đối Tác", "pricing.p3.f4": "Hoa hồng giới thiệu đến 40%", "pricing.p3.cta": "Liên Hệ Tư Vấn",
+    "testi.tag": "Học viên nói gì", "testi.title": "Câu Chuyện Từ Cộng Đồng Tự Do",
+    "testi.q1": "\"Sau 3 tháng áp dụng lộ trình 5 cánh cửa, mình đã có nguồn thu nhập thụ động đầu tiên từ Affiliate. AI thực sự tiết kiệm cho mình rất nhiều thời gian.\"", "testi.p1role": "Học viên khóa 3",
+    "testi.q2": "\"Mentor hỗ trợ rất tận tâm, giáo trình dễ hiểu dù mình không có nền tảng kỹ thuật. Giờ mình đã tự tin xây kênh riêng.\"", "testi.p2role": "Học viên khóa 5",
+    "testi.q3": "\"Chương trình Đối Tác VIP giúp mình có thêm nguồn thu nhập từ việc giới thiệu khóa học. Hoa hồng minh bạch, thanh toán đúng hạn.\"", "testi.p3role": "Đối tác VIP",
+    "partners.tag": "Đối tác", "partners.title": "Cùng Chúng Tôi Xây Dựng Cộng Đồng Tự Do",
+    "partners.desc": "Học viện tự hào đồng hành cùng các nền tảng và cộng đồng uy tín trong lĩnh vực Affiliate & AI.",
+    "partners.ctaTitle": "Trở Thành Đối Tác Giới Thiệu", "partners.ctaDesc": "Kiếm hoa hồng lên đến 40% khi giới thiệu học viên mới tham gia học viện — không giới hạn số lượng.", "partners.ctaBtn": "Đăng Ký Làm Đối Tác",
+    "faq.tag": "Hỏi đáp", "faq.title": "Câu Hỏi Thường Gặp",
+    "faq.q1": "Tôi chưa có kinh nghiệm gì về Affiliate, có học được không?", "faq.a1": "Hoàn toàn được. Lộ trình 5 cánh cửa được thiết kế từ số 0, phù hợp cho người mới bắt đầu hoàn toàn.",
+    "faq.q2": "Cần bao nhiêu vốn để bắt đầu?", "faq.a2": "Bạn có thể bắt đầu với gói miễn phí và số vốn gần như bằng 0, chỉ cần thời gian và sự kiên trì.",
+    "faq.q3": "Tôi có được hỗ trợ sau khi mua khóa học không?", "faq.a3": "Có. Mọi học viên gói Cánh Cửa Tự Do trở lên đều có mentor đồng hành 1-1 và cộng đồng hỗ trợ 24/7.",
+    "faq.q4": "Có được hoàn tiền nếu không phù hợp không?", "faq.a4": "Chúng tôi có chính sách hoàn tiền trong 7 ngày đầu tiên nếu bạn cảm thấy chương trình không phù hợp.",
+    "cta.title": "Nhận Ngay Ebook \"Mật Mã Tự Do\" Miễn Phí", "cta.desc": "Để lại email để nhận tài liệu và cập nhật mới nhất từ học viện — không spam, hủy đăng ký bất cứ lúc nào.",
+    "cta.placeholder": "Nhập email của bạn", "cta.btn": "Nhận Ngay",
+    "footer.desc": "Học viện Affiliate x AI giúp bạn xây dựng hệ thống thu nhập tự động và làm chủ thời gian của chính mình.",
+    "footer.explore": "Khám phá", "footer.company": "Công ty",
+    "footer.about": "Về chúng tôi", "footer.blog": "Blog", "footer.careers": "Tuyển dụng", "footer.contact": "Liên hệ",
+    "footer.legal": "Pháp lý", "footer.terms": "Điều khoản sử dụng", "footer.privacy": "Chính sách bảo mật", "footer.refund": "Chính sách hoàn tiền",
+    "footer.copyright": "© 2026 Tự Do Thịnh Vượng - Đậu Ánh AI. Bảo lưu mọi quyền.",
+    "auth.loginTab": "Đăng nhập", "auth.registerTab": "Đăng ký", "auth.email": "Email", "auth.password": "Mật khẩu", "auth.name": "Họ và tên",
+    "auth.errEmail": "Vui lòng nhập email hợp lệ", "auth.errPassword": "Mật khẩu tối thiểu 6 ký tự", "auth.errName": "Vui lòng nhập họ tên",
+    "auth.agree": "Tôi đồng ý với Điều khoản sử dụng & Chính sách bảo mật",
+    "auth.loginBtn": "Đăng Nhập", "auth.registerBtn": "Tạo Tài Khoản",
+    "auth.noAccount": "Chưa có tài khoản?", "auth.registerNow": "Đăng ký ngay", "auth.haveAccount": "Đã có tài khoản?", "auth.loginNow": "Đăng nhập",
+    "auth.demoNote": "⚠ Đây là bản demo giao diện — dữ liệu chỉ lưu tạm trên trình duyệt của bạn, cần kết nối máy chủ thật để dùng chính thức.",
+    "toast.registerSuccess": "Tạo tài khoản thành công! Chào mừng bạn đến với Tự Do Thịnh Vượng - Đậu Ánh AI.", "toast.loginSuccess": "Đăng nhập thành công!",
+    "toast.newsletterSuccess": "Cảm ơn bạn! Ebook đã được gửi tới email của bạn (demo).", "toast.emailExists": "Email này đã được đăng ký."
+  },
+  en: {
+    "nav.academy": "Academy", "nav.courses": "Courses", "nav.products": "Products", "nav.partners": "Partners", "nav.faq": "FAQ", "nav.login": "Log in", "nav.register": "Sign up",
+    "hero.tag": "Freedom Code — Affiliate x AI",
+    "hero.h1a": "5 Destiny", "hero.h1b": "Doors", "hero.h1c": "Master The", "hero.h1d": "Affiliate x AI System", "hero.h1e": "That Open", "hero.h1f": "The Door To Freedom",
+    "hero.sub": "A 5-step system that helps beginners build passive income from Affiliate Marketing, harnessing AI to automate the entire process — no experience, no big capital required.",
+    "hero.ctaPrimary": "Explore Now", "hero.ctaSecondary": "View Curriculum",
+    "hero.note": "Free \"Freedom Code\" ebook when you sign up today · No credit card required",
+    "stats.students": "Students enrolled", "stats.countries": "Countries reached", "stats.satisfaction": "% student satisfaction", "stats.doors": "Roadmap doors",
+    "doors.tag": "Academy roadmap", "doors.title": "5 Doors On The Journey To Freedom",
+    "doors.desc": "Each door is a milestone — pass through all five and you'll own a nearly self-running Affiliate x AI system.",
+    "doors.d1.title": "Beginner's Mindset", "doors.d1.desc": "Build the right mindset about Affiliate Marketing, clear up misconceptions, and lay a solid foundation.",
+    "doors.d2.title": "Pick A Profitable Niche", "doors.d2.desc": "A method for choosing a promising, low-competition niche that fits your strengths.",
+    "doors.d3.title": "Build Channel & Content", "doors.d3.desc": "Build a professional content channel that attracts the right target audience.",
+    "doors.d4.title": "Automate With AI", "doors.d4.desc": "Use AI to write content, handle customer care, and optimize conversions 24/7.",
+    "doors.d5.title": "Replicate The System", "doors.d5.desc": "Scale your income system across channels and products toward financial freedom.",
+    "catalog.tag": "The vault", "catalog.title": "Every Door — Its Own Code",
+    "catalog.desc": "Learn each code at your own pace, or own the full set to complete the 5-door journey.",
+    "catalog.badge.free": "Free", "catalog.badge.hot": "Bestseller", "catalog.badge.popular": "Most popular",
+    "catalog.ebook.title": "Freedom Code Ebook", "catalog.ebook.meta": "48 pages · Start now", "catalog.ebook.spine": "FREEDOM CODE",
+    "catalog.free": "Free", "catalog.cta": "Get it now →", "catalog.cta2": "View details →",
+    "catalog.c1.title": "The Mindset Code", "catalog.c1.meta": "5 lessons", "catalog.c1.price": "99,000đ",
+    "catalog.c2.title": "The Niche Code", "catalog.c2.meta": "6 lessons", "catalog.c2.price": "149,000đ",
+    "catalog.c3.title": "The Content Code", "catalog.c3.meta": "7 lessons", "catalog.c3.price": "199,000đ",
+    "catalog.c4.title": "The AI Automation Code", "catalog.c4.meta": "8 lessons", "catalog.c4.price": "249,000đ",
+    "catalog.c5.title": "The Replication Code", "catalog.c5.meta": "6 lessons", "catalog.c5.price": "299,000đ",
+    "catalog.bundle.title": "The Full 5-Code Set", "catalog.bundle.meta": "32 lessons · 1-on-1 mentor",
+    "catalog.bundle.note": "Included in the Door To Freedom plan", "catalog.bundle.cta": "See the bundle →",
+    "about.tag": "About the academy", "about.title": "Tự Do Thịnh Vượng - Đậu Ánh AI — Where Those Who Want To Take Control Of Life Begin",
+    "about.desc": "We don't sell \"get rich quick\" — we give you the system, AI tools, and community to build sustainable income from Affiliate Marketing yourself.",
+    "about.p1": "Practical curriculum, updated with the latest AI trends", "about.p2": "1-on-1 mentor support throughout the course",
+    "about.p3": "A student community that supports each other 24/7", "about.p4": "Exclusive AI toolkit that cuts work time by 80%", "about.cta": "View Learning Path",
+    "pricing.tag": "Products", "pricing.title": "Choose The Plan That Fits You", "pricing.desc": "Start free, upgrade anytime you're ready to go further.",
+    "pricing.free": "Free forever", "pricing.popular": "Most popular", "pricing.oneTime": "/ full course",
+    "pricing.p1.name": "Starter", "pricing.p1.f1": "\"Freedom Code\" ebook", "pricing.p1.f2": "3 foundation lessons", "pricing.p1.f3": "Student community", "pricing.p1.cta": "Start For Free",
+    "pricing.p2.name": "Door To Freedom", "pricing.p2.f1": "All 5 roadmap doors", "pricing.p2.f2": "Exclusive AI toolkit", "pricing.p2.f3": "1-on-1 mentor support", "pricing.p2.f4": "Lifetime curriculum updates", "pricing.p2.cta": "Enroll Now",
+    "pricing.p3.name": "VIP Partner", "pricing.p3.old": "Includes all mid-tier benefits", "pricing.p3.f1": "Everything in Door To Freedom", "pricing.p3.f2": "Weekly small-group coaching", "pricing.p3.f3": "Access to Partner Program", "pricing.p3.f4": "Up to 40% referral commission", "pricing.p3.cta": "Contact Us",
+    "testi.tag": "What students say", "testi.title": "Stories From The Freedom Community",
+    "testi.q1": "\"After 3 months following the 5-door roadmap, I got my first passive income from Affiliate. AI genuinely saved me a huge amount of time.\"", "testi.p1role": "Cohort 3 student",
+    "testi.q2": "\"The mentor support was excellent, and the curriculum was easy to follow even with no technical background. Now I'm confident building my own channel.\"", "testi.p2role": "Cohort 5 student",
+    "testi.q3": "\"The VIP Partner program gave me an extra income stream from referring the course. Commissions are transparent and paid on time.\"", "testi.p3role": "VIP Partner",
+    "partners.tag": "Partners", "partners.title": "Build The Freedom Community With Us",
+    "partners.desc": "The academy proudly partners with trusted platforms and communities in the Affiliate & AI space.",
+    "partners.ctaTitle": "Become A Referral Partner", "partners.ctaDesc": "Earn up to 40% commission for referring new students to the academy — no limit on volume.", "partners.ctaBtn": "Apply As Partner",
+    "faq.tag": "FAQ", "faq.title": "Frequently Asked Questions",
+    "faq.q1": "I have no experience with Affiliate — can I still learn?", "faq.a1": "Absolutely. The 5-door roadmap is designed from zero, made for complete beginners.",
+    "faq.q2": "How much capital do I need to start?", "faq.a2": "You can start with the free plan and almost no capital — just time and persistence.",
+    "faq.q3": "Do I get support after purchasing the course?", "faq.a3": "Yes. Every student on the Door To Freedom plan or above gets a 1-on-1 mentor and 24/7 community support.",
+    "faq.q4": "Is there a refund if it's not a good fit?", "faq.a4": "We offer a refund within the first 7 days if you feel the program isn't right for you.",
+    "cta.title": "Get The Free \"Freedom Code\" Ebook Now", "cta.desc": "Leave your email to receive the ebook and the latest updates from the academy — no spam, unsubscribe anytime.",
+    "cta.placeholder": "Enter your email", "cta.btn": "Get It Now",
+    "footer.desc": "An Affiliate x AI academy that helps you build an automated income system and take control of your own time.",
+    "footer.explore": "Explore", "footer.company": "Company",
+    "footer.about": "About us", "footer.blog": "Blog", "footer.careers": "Careers", "footer.contact": "Contact",
+    "footer.legal": "Legal", "footer.terms": "Terms of Service", "footer.privacy": "Privacy Policy", "footer.refund": "Refund Policy",
+    "footer.copyright": "© 2026 Tự Do Thịnh Vượng - Đậu Ánh AI. All rights reserved.",
+    "auth.loginTab": "Log in", "auth.registerTab": "Sign up", "auth.email": "Email", "auth.password": "Password", "auth.name": "Full name",
+    "auth.errEmail": "Please enter a valid email", "auth.errPassword": "Password must be at least 6 characters", "auth.errName": "Please enter your name",
+    "auth.agree": "I agree to the Terms of Service & Privacy Policy",
+    "auth.loginBtn": "Log In", "auth.registerBtn": "Create Account",
+    "auth.noAccount": "Don't have an account?", "auth.registerNow": "Sign up now", "auth.haveAccount": "Already have an account?", "auth.loginNow": "Log in",
+    "auth.demoNote": "⚠ This is a UI demo — data is only stored temporarily in your browser. A real backend is required for production use.",
+    "toast.registerSuccess": "Account created! Welcome to Tự Do Thịnh Vượng - Đậu Ánh AI.", "toast.loginSuccess": "Logged in successfully!",
+    "toast.newsletterSuccess": "Thanks! The ebook has been sent to your email (demo).", "toast.emailExists": "This email is already registered."
+  }
+};
+
+(function () {
+  "use strict";
+  const langButtons = document.querySelectorAll('#langSwitch button');
+  let currentLang = 'vi';
+
+  function applyLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+    const dict = TRANSLATIONS[lang] || TRANSLATIONS.vi;
+    document.querySelectorAll('[data-i18n]').forEach(el => { const key = el.getAttribute('data-i18n'); if (dict[key]) el.textContent = dict[key]; });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { const key = el.getAttribute('data-i18n-placeholder'); if (dict[key]) el.setAttribute('placeholder', dict[key]); });
+  }
+  langButtons.forEach(btn => btn.addEventListener('click', () => applyLang(btn.dataset.lang)));
+  applyLang(currentLang);
+
+  const themeToggle = document.getElementById('themeToggle');
+  let theme = 'dark';
+  themeToggle.addEventListener('click', () => {
+    theme = theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', theme);
+  });
+
+  const navToggle = document.getElementById('navToggle');
+  const mainNav = document.getElementById('mainNav');
+  navToggle.addEventListener('click', () => { navToggle.classList.toggle('active'); mainNav.classList.toggle('open'); });
+  mainNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { navToggle.classList.remove('active'); mainNav.classList.remove('open'); }));
+
+  const toastEl = document.getElementById('toast');
+  let toastTimer = null;
+  function showToast(message) {
+    toastEl.textContent = message;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('show'), 3200);
+  }
+
+  const authModal = document.getElementById('authModal');
+  const authClose = document.getElementById('authClose');
+  const authTabs = authModal.querySelectorAll('.auth-tabs button');
+  const authPanels = { login: document.getElementById('loginPanel'), register: document.getElementById('registerPanel') };
+
+  function openAuth(tab) { authModal.classList.add('active'); document.body.style.overflow = 'hidden'; switchAuthTab(tab || 'login'); }
+  function closeAuth() { authModal.classList.remove('active'); document.body.style.overflow = ''; }
+  function switchAuthTab(tab) {
+    authTabs.forEach(btn => btn.classList.toggle('active', btn.dataset.tab === tab));
+    Object.entries(authPanels).forEach(([key, panel]) => panel.classList.toggle('active', key === tab));
+  }
+  document.querySelectorAll('[data-open-auth]').forEach(btn => btn.addEventListener('click', () => openAuth(btn.getAttribute('data-open-auth'))));
+  authClose.addEventListener('click', closeAuth);
+  authModal.addEventListener('click', (e) => { if (e.target === authModal) closeAuth(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAuth(); });
+  authTabs.forEach(btn => btn.addEventListener('click', () => switchAuthTab(btn.dataset.tab)));
+  authModal.querySelectorAll('[data-switch-tab]').forEach(btn => btn.addEventListener('click', () => switchAuthTab(btn.getAttribute('data-switch-tab'))));
+
+  function setFieldValid(fieldEl, valid) { fieldEl.classList.toggle('invalid', !valid); }
+  function validateForm(form, rules) {
+    let valid = true;
+    rules.forEach(({ field, test }) => {
+      const fieldEl = form.querySelector('[data-field="' + field + '"]');
+      const input = fieldEl.querySelector('input');
+      const ok = test(input.value.trim(), input);
+      setFieldValid(fieldEl, ok);
+      if (!ok) valid = false;
+    });
+    return valid;
+  }
+  const emailTest = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+  function escapeHtml(str) {
+    return String(str ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  }
+  function formatVnd(n) {
+    if (!n) return '0đ';
+    return Number(n).toLocaleString('vi-VN') + 'đ';
+  }
+
+  let sb, bankInfo, currentUser = null;
+  const loginNavBtn = document.getElementById('loginNavBtn');
+  const registerNavBtn = document.getElementById('registerNavBtn');
+  const dashboardNavLink = document.getElementById('dashboardNavLink');
+  const logoutNavBtn = document.getElementById('logoutNavBtn');
+
+  function applyAuthState() {
+    const loggedIn = !!currentUser;
+    loginNavBtn.style.display = loggedIn ? 'none' : '';
+    registerNavBtn.style.display = loggedIn ? 'none' : '';
+    dashboardNavLink.style.display = loggedIn ? '' : 'none';
+    logoutNavBtn.style.display = loggedIn ? '' : 'none';
+  }
+  logoutNavBtn.addEventListener('click', async () => {
+    await sb.auth.signOut();
+    showToast('Đã đăng xuất');
+  });
+
+  const registerForm = document.getElementById('registerPanel');
+  registerForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const valid = validateForm(registerForm, [
+      { field: 'name', test: (v) => v.length > 1 },
+      { field: 'email', test: emailTest },
+      { field: 'password', test: (v) => v.length >= 6 },
+    ]);
+    if (!valid) return;
+    const fd = new FormData(registerForm);
+    const { error } = await sb.auth.signUp({
+      email: fd.get('email'),
+      password: fd.get('password'),
+      options: { data: { full_name: fd.get('name') } }
+    });
+    if (error) { showToast(error.message); return; }
+    showToast(TRANSLATIONS[currentLang]['toast.registerSuccess']);
+    registerForm.reset();
+    closeAuth();
+  });
+
+  const loginForm = document.getElementById('loginPanel');
+  loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const valid = validateForm(loginForm, [
+      { field: 'email', test: emailTest },
+      { field: 'password', test: (v) => v.length >= 6 },
+    ]);
+    if (!valid) return;
+    const fd = new FormData(loginForm);
+    const { error } = await sb.auth.signInWithPassword({ email: fd.get('email'), password: fd.get('password') });
+    if (error) { showToast('Đăng nhập thất bại: ' + error.message); return; }
+    showToast(TRANSLATIONS[currentLang]['toast.loginSuccess']);
+    loginForm.reset();
+    closeAuth();
+  });
+
+  const newsletterForm = document.getElementById('newsletterForm');
+  newsletterForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    newsletterForm.reset();
+    openAuth('register');
+  });
+
+  async function loadCourses() {
+    const grid = document.getElementById('course-grid');
+    const { data: courses, error } = await sb
+      .from('courses')
+      .select('id, title, description, price, is_bundle')
+      .order('sort_order', { ascending: true });
+
+    if (error) {
+      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1; text-align:center; padding:40px; color:var(--text-faint)">Không tải được danh sách khoá học.</div>';
+      return;
+    }
+    if (!courses || courses.length === 0) {
+      grid.innerHTML = '<div class="empty-state" style="grid-column:1/-1; text-align:center; padding:40px; color:var(--text-faint)">Chưa có khoá học nào.</div>';
+      return;
+    }
+
+    grid.innerHTML = courses.map((c) => `
+      <div class="course-card reveal visible">
+        <div class="course-cover">
+          <span class="course-badge${c.is_bundle ? ' course-badge--popular' : ''}">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>
+            <span>${c.is_bundle ? 'Trọn bộ' : 'Khoá'}</span>
+          </span>
+        </div>
+        <div class="course-body">
+          <h3 class="course-title">${escapeHtml(c.title)}</h3>
+          <div class="course-meta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"></path></svg><span>${escapeHtml(c.description || '')}</span></div>
+          <div class="course-foot">
+            <span class="course-price">${formatVnd(c.price)}</span>
+            <button type="button" class="course-link" data-buy="${c.id}" data-title="${escapeHtml(c.title)}" data-price="${c.price}">Mua khoá học →</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    grid.querySelectorAll('[data-buy]').forEach((btn) => {
+      btn.addEventListener('click', () => buyCourse(btn.dataset.buy, btn.dataset.title, Number(btn.dataset.price)));
+    });
+  }
+
+  async function buyCourse(courseId, title, price) {
+    if (!currentUser) {
+      showToast('Vui lòng đăng nhập hoặc đăng ký trước khi mua khoá học');
+      openAuth('register');
+      return;
+    }
+    const { data: order, error } = await sb
+      .from('orders')
+      .insert({ student_id: currentUser.id, course_id: courseId, amount: price })
+      .select('transfer_code, amount')
+      .single();
+    if (error) { showToast('Không tạo được đơn hàng: ' + error.message); return; }
+
+    document.getElementById('orderNote').innerHTML = `
+      <p><strong>Khoá học:</strong> ${escapeHtml(title)}</p>
+      <p><strong>Số tiền:</strong> ${formatVnd(order.amount)}</p>
+      <p><strong>Ngân hàng:</strong> ${escapeHtml(bankInfo.name || '(chưa cấu hình)')}</p>
+      <p><strong>Số tài khoản:</strong> ${escapeHtml(bankInfo.accountNumber || '(chưa cấu hình)')}</p>
+      <p><strong>Chủ tài khoản:</strong> ${escapeHtml(bankInfo.accountHolder || '(chưa cấu hình)')}</p>
+      <p><strong>Nội dung chuyển khoản:</strong> ghi đúng mã <code>${order.transfer_code}</code></p>
+      <p style="margin-top:10px; color:var(--text-faint)">Sau khi chuyển khoản, đợi admin xác nhận (thường trong vài giờ), rồi vào "Bài giảng của tôi" để học.</p>
+    `;
+    document.getElementById('orderModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  const orderModal = document.getElementById('orderModal');
+  document.getElementById('orderClose').addEventListener('click', () => {
+    orderModal.classList.remove('active');
+    document.body.style.overflow = '';
+  });
+  orderModal.addEventListener('click', (e) => { if (e.target === orderModal) { orderModal.classList.remove('active'); document.body.style.overflow = ''; } });
+
+  (async function initAuth() {
+    const ready = await window.sbReady;
+    sb = ready.client;
+    bankInfo = ready.bank;
+
+    const { data } = await sb.auth.getSession();
+    currentUser = data.session ? data.session.user : null;
+    applyAuthState();
+
+    sb.auth.onAuthStateChange((_event, session) => {
+      currentUser = session ? session.user : null;
+      applyAuthState();
+    });
+
+    await loadCourses();
+  })();
+
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(openItem => {
+        if (openItem !== item) { openItem.classList.remove('open'); openItem.querySelector('.faq-a').style.maxHeight = null; }
+      });
+      item.classList.toggle('open', !isOpen);
+      a.style.maxHeight = !isOpen ? a.scrollHeight + 'px' : null;
+    });
+  });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); io.unobserve(entry.target); } });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  const statEls = document.querySelectorAll('.stat-num');
+  const statIo = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      const target = parseInt(el.getAttribute('data-count'), 10) || 0;
+      const duration = 1200;
+      const start = performance.now();
+      function tick(now) {
+        const progress = Math.min((now - start) / duration, 1);
+        el.textContent = Math.floor(progress * target).toLocaleString('vi-VN');
+        if (progress < 1) requestAnimationFrame(tick); else el.textContent = target.toLocaleString('vi-VN');
+      }
+      requestAnimationFrame(tick);
+      statIo.unobserve(el);
+    });
+  }, { threshold: 0.4 });
+  statEls.forEach(el => statIo.observe(el));
+
+  const header = document.querySelector('.site-header');
+  window.addEventListener('scroll', () => { header.style.boxShadow = window.scrollY > 12 ? '0 8px 24px rgba(0,0,0,.25)' : 'none'; });
+})();
+</script>
 </body>
 </html>
