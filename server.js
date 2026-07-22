@@ -35,6 +35,13 @@ const upload = multer({
   }
 });
 
+// Video được upload theo từng đoạn nhỏ (không upload nguyên file 1 lần) vì
+// Vercel giới hạn body request ~4.5MB — 4MB/đoạn để có biên an toàn.
+const uploadVideoChunk = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 4 * 1024 * 1024 }
+});
+
 // ==================== API ROUTES ====================
 
 // Health check & status
@@ -77,6 +84,56 @@ app.get('/api/posts', async (req, res) => {
     const limit = req.query.limit || 25;
     const data = await meta.getPagePosts(limit);
     res.json(data);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// ==================== Video (resumable upload — 3 pha) ====================
+// Video từ máy được đẩy lên theo từng đoạn nhỏ qua 3 bước: start (khai báo
+// dung lượng) -> chunk (gọi lặp lại cho tới hết file) -> finish (đăng ngay
+// hoặc lên lịch). Xem services/metaApi.js để biết chi tiết vì sao không thể
+// upload nguyên file một lần như ảnh (giới hạn body request của Vercel).
+
+// Bước 1: khởi tạo phiên upload
+app.post('/api/videos/start', async (req, res) => {
+  try {
+    const { fileSize } = req.body;
+    if (!fileSize) return res.status(400).json({ error: 'Thiếu fileSize' });
+    const data = await meta.startVideoUpload(fileSize);
+    res.json({
+      videoId: data.video_id,
+      uploadSessionId: data.upload_session_id,
+      startOffset: Number(data.start_offset),
+      endOffset: Number(data.end_offset)
+    });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Bước 2: gửi từng đoạn nhị phân của video — gọi lặp lại tới khi hết file
+app.post('/api/videos/chunk', uploadVideoChunk.single('chunk'), async (req, res) => {
+  try {
+    if (!req.file) return res.status(400).json({ error: 'Thiếu dữ liệu chunk' });
+    const { uploadSessionId, startOffset } = req.body;
+    if (!uploadSessionId || startOffset === undefined) {
+      return res.status(400).json({ error: 'Thiếu uploadSessionId/startOffset' });
+    }
+    const data = await meta.transferVideoChunk(uploadSessionId, Number(startOffset), req.file.buffer, req.file.originalname);
+    res.json({ startOffset: Number(data.start_offset), endOffset: Number(data.end_offset) });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Bước 3: hoàn tất — đăng ngay hoặc lên lịch (video hỗ trợ lên lịch, khác với ảnh)
+app.post('/api/videos/finish', async (req, res) => {
+  try {
+    const { uploadSessionId, description, scheduledTime } = req.body;
+    if (!uploadSessionId) return res.status(400).json({ error: 'Thiếu uploadSessionId' });
+    await meta.finishVideoUpload(uploadSessionId, { description, scheduledTime });
+    res.json({ success: true, message: scheduledTime ? 'Lên lịch đăng video thành công!' : 'Đăng video thành công!' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

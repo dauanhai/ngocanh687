@@ -6,6 +6,7 @@
     selectedTemplateCategory: 'sales',
     createImageMode: 'url', // 'url' | 'upload'
     selectedFile: null,
+    selectedVideoFile: null,
     metricPeriod: 'day'
   };
 
@@ -363,9 +364,21 @@
           </div>
 
           <div class="form-group">
+            <label class="form-label">Video (tuỳ chọn)</label>
+            <div class="image-drop" id="video-drop">🎬 Nhấn để chọn video từ máy tính</div>
+            <input type="file" id="post-video-file" accept="video/*" style="display:none">
+            <div class="form-hint" id="video-file-info" style="display:none"></div>
+            <div class="form-hint">Video tối đa ~1.5GB / 45 phút (giới hạn của Facebook). Không chọn ảnh và video cùng lúc. File càng lớn tải càng lâu — đừng đóng tab giữa chừng.</div>
+            <div id="video-upload-progress" style="display:none; margin-top:10px">
+              <div class="progress-bar"><div class="progress-bar-fill" id="video-progress-fill" style="width:0%"></div></div>
+              <div class="form-hint" id="video-progress-text">Đang tải lên video... 0%</div>
+            </div>
+          </div>
+
+          <div class="form-group">
             <div class="checkbox-row">
               <input type="checkbox" id="post-schedule-toggle">
-              <label for="post-schedule-toggle">Lên lịch đăng bài (chỉ áp dụng cho bài viết không kèm ảnh)</label>
+              <label for="post-schedule-toggle">Lên lịch đăng bài (bài chữ và video đều lên lịch được; bài kèm ảnh sẽ đăng ngay)</label>
             </div>
             <div class="form-group" id="schedule-time-group" style="display:none; margin-top:10px">
               <input type="datetime-local" class="form-control" id="post-schedule-time">
@@ -435,6 +448,22 @@
       document.getElementById('schedule-time-group').style.display = e.target.checked ? '' : 'none';
     });
 
+    const videoDrop = document.getElementById('video-drop');
+    const videoFileInput = document.getElementById('post-video-file');
+    videoDrop.addEventListener('click', () => videoFileInput.click());
+    videoFileInput.addEventListener('change', () => {
+      const file = videoFileInput.files[0];
+      state.selectedVideoFile = file || null;
+      const infoBox = document.getElementById('video-file-info');
+      if (file) {
+        infoBox.style.display = '';
+        infoBox.textContent = `Đã chọn: ${file.name} — ${(file.size / (1024 * 1024)).toFixed(1)}MB`;
+      } else {
+        infoBox.style.display = 'none';
+        infoBox.textContent = '';
+      }
+    });
+
     document.getElementById('submit-post').addEventListener('click', submitCreatePost);
   }
 
@@ -471,6 +500,51 @@
     });
   }
 
+  // Video được đẩy lên theo từng đoạn ~3.5MB (an toàn dưới giới hạn 4.5MB
+  // của Vercel), lặp lại cho tới khi hết file rồi mới "finish" để đăng/lên lịch.
+  const VIDEO_CHUNK_SIZE = 3.5 * 1024 * 1024;
+
+  async function uploadVideoWithProgress(file, description, scheduledTime) {
+    const progressWrap = document.getElementById('video-upload-progress');
+    const progressFill = document.getElementById('video-progress-fill');
+    const progressText = document.getElementById('video-progress-text');
+    progressWrap.style.display = '';
+    progressFill.style.width = '0%';
+    progressText.textContent = 'Đang khởi tạo phiên tải lên...';
+
+    const startData = await api('/api/videos/start', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ fileSize: file.size })
+    });
+
+    let offset = startData.startOffset;
+    while (offset < file.size) {
+      const end = Math.min(offset + VIDEO_CHUNK_SIZE, file.size);
+      const chunkFormData = new FormData();
+      chunkFormData.append('chunk', file.slice(offset, end), file.name);
+      chunkFormData.append('uploadSessionId', startData.uploadSessionId);
+      chunkFormData.append('startOffset', String(offset));
+      const chunkResult = await api('/api/videos/chunk', { method: 'POST', body: chunkFormData });
+
+      if (chunkResult.startOffset <= offset) {
+        throw new Error('Tải video bị treo (server không nhận thêm dữ liệu), thử lại giúp mình nhé');
+      }
+      offset = chunkResult.startOffset;
+      const percent = Math.min(100, Math.round((offset / file.size) * 100));
+      progressFill.style.width = percent + '%';
+      progressText.textContent = `Đang tải lên video... ${percent}%`;
+    }
+
+    progressText.textContent = 'Đang hoàn tất...';
+    await api('/api/videos/finish', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ uploadSessionId: startData.uploadSessionId, description, scheduledTime })
+    });
+    progressWrap.style.display = 'none';
+  }
+
   async function submitCreatePost() {
     const submitBtn = document.getElementById('submit-post');
     const message = document.getElementById('post-message').value.trim();
@@ -480,9 +554,14 @@
     const scheduleTime = document.getElementById('post-schedule-time').value;
     const hasUploadFile = state.createImageMode === 'upload' && state.selectedFile;
     const hasImageUrl = state.createImageMode === 'url' && imageUrl;
+    const hasVideoFile = !!state.selectedVideoFile;
 
-    if (!message && !hasUploadFile && !hasImageUrl) {
-      showToast('Vui lòng nhập nội dung hoặc chọn ảnh', 'error');
+    if (!message && !hasUploadFile && !hasImageUrl && !hasVideoFile) {
+      showToast('Vui lòng nhập nội dung hoặc chọn ảnh/video', 'error');
+      return;
+    }
+    if (hasVideoFile && (hasUploadFile || hasImageUrl)) {
+      showToast('Chỉ chọn ảnh hoặc video, không chọn cùng lúc', 'error');
       return;
     }
     if (isScheduled && (hasUploadFile || hasImageUrl)) {
@@ -508,6 +587,8 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ imageUrl, caption: message })
         });
+      } else if (hasVideoFile) {
+        await uploadVideoWithProgress(state.selectedVideoFile, message, isScheduled ? scheduleTime : undefined);
       } else if (isScheduled) {
         await api('/api/posts/schedule', {
           method: 'POST',
@@ -525,6 +606,7 @@
       location.hash = 'posts';
     } catch (err) {
       showToast(err.message, 'error');
+      document.getElementById('video-upload-progress').style.display = 'none';
     } finally {
       submitBtn.disabled = false;
       submitBtn.textContent = '🚀 Đăng bài viết';

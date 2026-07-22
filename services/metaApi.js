@@ -4,6 +4,9 @@ const FormData = require('form-data');
 class MetaApiService {
   constructor() {
     this.baseUrl = `https://graph.facebook.com/${process.env.GRAPH_API_VERSION}`;
+    // Video nên gọi qua host riêng graph-video.facebook.com theo khuyến nghị của Meta
+    // cho resumable upload (ổn định hơn với file lớn so với graph.facebook.com).
+    this.videoBaseUrl = `https://graph-video.facebook.com/${process.env.GRAPH_API_VERSION}`;
     this.pageId = process.env.PAGE_ID;
     this.accessToken = process.env.PAGE_ACCESS_TOKEN;
   }
@@ -129,6 +132,72 @@ class MetaApiService {
   // Get scheduled posts
   async getScheduledPosts() {
     return this._request(`/${this.pageId}/scheduled_posts?fields=id,message,scheduled_publish_time,created_time`);
+  }
+
+  // ==================== Video (resumable upload, 3 pha) ====================
+  // Vercel giới hạn body request ~4.5MB nên video không thể đẩy nguyên file
+  // như ảnh — phải chia nhỏ và gửi từng đoạn qua giao thức resumable upload
+  // chính thức của Meta: start (khai báo dung lượng) -> transfer (từng đoạn,
+  // gọi lặp lại) -> finish (đăng ngay hoặc lên lịch).
+
+  async startVideoUpload(fileSize) {
+    const form = new FormData();
+    form.append('upload_phase', 'start');
+    form.append('file_size', String(fileSize));
+    form.append('access_token', this.accessToken);
+
+    const response = await fetch(`${this.videoBaseUrl}/${this.pageId}/videos`, {
+      method: 'POST',
+      body: form,
+      headers: form.getHeaders()
+    });
+    const data = await response.json();
+    if (data.error) {
+      throw new Error(`Meta Video API error: ${data.error.message} (Code: ${data.error.code})`);
+    }
+    return data; // { video_id, upload_session_id, start_offset, end_offset }
+  }
+
+  async transferVideoChunk(uploadSessionId, startOffset, chunkBuffer, filename) {
+    const form = new FormData();
+    form.append('upload_phase', 'transfer');
+    form.append('start_offset', String(startOffset));
+    form.append('access_token', this.accessToken);
+    form.append('video_file_chunk', chunkBuffer, { filename: filename || 'chunk.mp4', contentType: 'application/octet-stream' });
+
+    const response = await fetch(`${this.videoBaseUrl}/${uploadSessionId}`, {
+      method: 'POST',
+      body: form,
+      headers: form.getHeaders()
+    });
+    const data = await response.json();
+    if (data.error) {
+      throw new Error(`Meta Video API error: ${data.error.message} (Code: ${data.error.code})`);
+    }
+    return data; // { start_offset, end_offset }
+  }
+
+  async finishVideoUpload(uploadSessionId, { description, scheduledTime } = {}) {
+    const form = new FormData();
+    form.append('upload_phase', 'finish');
+    form.append('access_token', this.accessToken);
+    if (description) form.append('description', description);
+    if (scheduledTime) {
+      const timestamp = Math.floor(new Date(scheduledTime).getTime() / 1000);
+      form.append('published', 'false');
+      form.append('scheduled_publish_time', String(timestamp));
+    }
+
+    const response = await fetch(`${this.videoBaseUrl}/${uploadSessionId}`, {
+      method: 'POST',
+      body: form,
+      headers: form.getHeaders()
+    });
+    const data = await response.json();
+    if (data.error) {
+      throw new Error(`Meta Video API error: ${data.error.message} (Code: ${data.error.code})`);
+    }
+    return data; // { success: true }
   }
 }
 
