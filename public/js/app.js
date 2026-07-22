@@ -551,7 +551,7 @@
     const link = document.getElementById('post-link').value.trim();
     const imageUrl = document.getElementById('post-image-url').value.trim();
     const isScheduled = document.getElementById('post-schedule-toggle').checked;
-    const scheduleTime = document.getElementById('post-schedule-time').value;
+    const scheduleTimeRaw = document.getElementById('post-schedule-time').value;
     const hasUploadFile = state.createImageMode === 'upload' && state.selectedFile;
     const hasImageUrl = state.createImageMode === 'url' && imageUrl;
     const hasVideoFile = !!state.selectedVideoFile;
@@ -568,10 +568,16 @@
       showToast('Bài viết kèm ảnh không hỗ trợ lên lịch', 'error');
       return;
     }
-    if (isScheduled && !scheduleTime) {
+    if (isScheduled && !scheduleTimeRaw) {
       showToast('Vui lòng chọn thời gian lên lịch', 'error');
       return;
     }
+    // post-schedule-time trả về giờ theo múi giờ của trình duyệt (VD: giờ VN)
+    // nhưng không kèm thông tin múi giờ trong chuỗi. Nếu gửi nguyên chuỗi đó
+    // lên server, server (chạy giờ UTC trên Vercel) sẽ hiểu nhầm thành giờ
+    // UTC, lệch 7 tiếng. Chuyển sang ISO string (có 'Z') ngay tại trình duyệt
+    // — nơi duy nhất biết đúng giờ VN của người dùng — để tránh nhầm lẫn.
+    const scheduleTime = scheduleTimeRaw ? new Date(scheduleTimeRaw).toISOString() : '';
 
     submitBtn.disabled = true;
     submitBtn.textContent = 'Đang xử lý...';
