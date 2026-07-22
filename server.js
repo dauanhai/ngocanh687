@@ -5,17 +5,22 @@ const path = require('path');
 const multer = require('multer');
 const MetaApiService = require('./services/metaApi');
 const lmsRoutes = require('./routes/lms');
+const messengerRoutes = require('./routes/messenger');
 
 const app = express();
 const meta = new MetaApiService();
 
 // Middleware
 app.use(cors());
-app.use(express.json());
+// Giữ lại rawBody để routes/messenger.js xác thực chữ ký HMAC của Meta.
+app.use(express.json({ verify: (req, res, buf) => { req.rawBody = buf; } }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Học viện Tự Do Thịnh Vượng / Đậu Ánh AI (public/hoc-vien) — xác nhận đơn hàng, mở khoá khoá học
 app.use('/api/lms', lmsRoutes);
+
+// AI Agent tự trả lời & chốt khách trên Messenger
+app.use('/api/messenger', messengerRoutes);
 
 // In-memory storage: works both locally and on serverless platforms
 // (e.g. Vercel) where the filesystem is read-only outside /tmp.

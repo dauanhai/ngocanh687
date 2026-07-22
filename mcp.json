@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "hidrix-tools": {
+      "command": "bun",
+      "args": ["run", "~/.hidrix-tools/src/index.ts"],
+      "env": {}
+    }
+  }
+}

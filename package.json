@@ -8,6 +8,7 @@
     "dev": "node --watch server.js"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.111.0",
     "@supabase/supabase-js": "^2.45.4",
     "express": "^4.21.0",
     "cors": "^2.8.5",

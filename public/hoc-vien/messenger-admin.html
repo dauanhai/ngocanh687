@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản trị AI Agent Messenger | Tự Do Thịnh Vượng - Đậu Ánh AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700;800&family=Fraunces:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/hoc-vien/" class="logo"><span class="logo-mark">ĐA</span><span>Tự Do Thịnh Vượng</span></a>
+      <div class="header-actions">
+        <a href="admin.html">Đơn hàng</a>
+        <span>·</span>
+        <span>AI Agent Messenger</span>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="page-head">
+      <h1>AI Agent Messenger</h1>
+      <p>Khách AI đã chốt (lead) và các hội thoại AI đang tạm dừng để bạn tự trả lời tay.</p>
+    </div>
+
+    <div class="card" id="passcode-card" style="max-width:380px">
+      <div class="form-group">
+        <label class="form-label">Mật khẩu quản trị</label>
+        <input type="password" id="passcode-input" class="form-control" placeholder="Nhập ADMIN_PASSCODE">
+      </div>
+      <button class="btn btn-primary btn-block" id="passcode-submit">Vào trang quản trị</button>
+    </div>
+
+    <div id="admin-panel" style="display:none">
+      <section style="margin-bottom:40px">
+        <h2 style="font-family:var(--font-display); font-size:20px; margin-bottom:14px;">Lead khách hàng</h2>
+        <div class="tabs" id="lead-tabs">
+          <button data-status="new" class="active">Mới</button>
+          <button data-status="contacted">Đã liên hệ</button>
+          <button data-status="closed">Đã chốt/đóng</button>
+        </div>
+        <div class="card table-wrap">
+          <table>
+            <thead>
+              <tr><th>Tên</th><th>SĐT</th><th>Quan tâm</th><th>Ghi chú</th><th>Thời gian</th><th></th></tr>
+            </thead>
+            <tbody id="leads-tbody"><tr><td colspan="6">Đang tải...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2 style="font-family:var(--font-display); font-size:20px; margin-bottom:14px;">Hội thoại cần bạn tự trả lời</h2>
+        <p class="form-hint" style="margin-bottom:14px;">AI đã tạm ngừng ở các hội thoại này (khiếu nại, ngoài khả năng, khách xin gặp người thật...). Vào Messenger/Meta Business Suite để trả lời tay, rồi bấm "Mở lại AI" khi xong.</p>
+        <div class="card table-wrap">
+          <table>
+            <thead>
+              <tr><th>PSID</th><th>Trạng thái</th><th>Cập nhật lúc</th><th></th></tr>
+            </thead>
+            <tbody id="convos-tbody"><tr><td colspan="4">Đang tải...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div class="toast-container" id="toast-container"></div>
+  <script src="js/messenger-admin.js"></script>
+</body>
+</html>
